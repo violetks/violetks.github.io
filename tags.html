@@ -25,7 +25,7 @@ header-img: "img/tag-bg.jpg"
             <!-- 标签云 -->
 			<div id='tag_cloud' class="tags">
 				{% for tag in site.tags %}
-				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}<sup>{{tag[1].size}}</sup></a>
 				{% endfor %}
 			</div>
 
@@ -49,7 +49,7 @@ header-img: "img/tag-bg.jpg"
 				 <div class="post-preview">
 				    <a href="{{ post.url | prepend: site.baseurl }}">
 				        <h2 class="post-title">
-                            {{ post.title }}
+                            {{ post.date | date:"%Y.%m" }}&nbsp;{{ post.title }}
 				        </h2>
 				        {% if post.subtitle %}
 				        <h3 class="post-subtitle">
