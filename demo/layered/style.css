@@ -18,7 +18,7 @@ body {
     transition: 0.5s;
 }
 
-/* .container img {
+.container img {
     position: absolute;
     width: 100%;
     transition: 0.5s;
@@ -42,4 +42,4 @@ body {
 .container:hover img:nth-child(1) {
     transform: translate(40px,-40px);
     opacity: .4;
-} */
+}
