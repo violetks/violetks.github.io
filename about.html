@@ -13,27 +13,24 @@ header-img: "img/post-bg-metro.jpg"
 
 <!-- Chinese Version -->
 <div class="zh post-container">
-
-    <!--copied from markdown -->
-    <!-- <blockquote><p>冰冻三尺 非一日之寒<br> -->
-    <!-- 积土成山 非斯须之作</p></blockquote> -->
-
-    <!-- <p>Hey，我是<strong>柏荧(BY)</strong>，一只iOS程序猿，现在厦门工作。</p> -->
-
-    <!-- <p>工作、学习之余，我还是一个健身爱好者，同时也非常喜欢拳击。</p> -->
-
-    <!-- <p>这是我的利用 <a href="https://pages.github.com/">GitHub Pages</a> 与 <a href="http://jekyll.com.cn/">Jekyll</a> 搭建的 个人博客。我在GitHub主页<a href="https://github.com/qiubaiying">👉GitHub·BY</a> 与 简书主页<a href="https://http://www.jianshu.com/u/e71990ada2fd">👉BY</a>。如果有什么问题，欢迎提出探讨~</p> -->
-
-    <!-- <p></p> -->
+    <p>博客搭建：<a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 与 <a href="http://jekyll.com.cn/" target="_blank">Jekyll</a></p>
     
-    <!-- <h5>Talks</h5> -->
-
-    <!-- <ul> -->
-        <!-- <li><a href="https://github.com">GitHub</a></li> -->
-        <!-- <li><a href="http://jekyll.com.cn/">jekyll</a></li> -->
-        <!-- <li><a href="http://huangxuan.me/">Hux</a></li>  -->
-        <!-- <li><a href="https://analytics.google.com/analytics">Google Analytics</a></li> -->
-    <!-- </ul> -->
+    <p>ECharts官网：<a href="https://www.echartsjs.com/zh/index.html" target="_blank">https://www.echartsjs.com/zh/index.html</a></p>
+    <p>ECharts案例：<a href="http://www.thinkgis.cn/public/sina/" target="_blank">Thinkgis - 2014新浪微博签到数据信息图</a></p>
+    
+    <h5>前端组件库：</h5>
+    <ul>
+        <li><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></li>
+        <li><a href="https://www.bootcss.com/" target="_blank">Bootstrap中文网</a></li>
+        <li><a href="https://code.z01.com/" target="_blank">Bootstrap逐浪官网</a></li>
+        <li><a href="https://www.apple.com/" target="_blank">Bootstrap案例：Apple官网</a></li> 
+        <li><a href="https://element.eleme.cn/2.0/#/zh-CN" target="_blank">elementUI</a></li>
+        <li><a href="https://www.layui.com/" target="_blank">Layui</a></li>
+    </ul>
+    
+    <p>阿里矢量图标库：<a href="https://www.iconfont.cn/" target="_blank">Iconfont</a></p>
+    <p>颜色选择：<a href="https://flatuicolors.com/" target="_blank">Flat UI Colors</a></p>
+    <p>ECMAScript6 入门：<a href="http://es6.ruanyifeng.com/" target="_blank">http://es6.ruanyifeng.com/</a></p>
 </div>
 
 <!-- English Version -->
@@ -99,9 +96,9 @@ header-img: "img/post-bg-metro.jpg"
 
 
 <!-- Gitalk 评论 start -->
-{% if site.gitalk.enable %}
+<!-- {% if site.gitalk.enable %} -->
 <!-- Gitalk link  -->
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
 
 <div id="gitalk-container"></div>
@@ -117,20 +114,20 @@ header-img: "img/post-bg-metro.jpg"
     });
     gitalk.render('gitalk-container');
 </script>
-{% endif %}
+{% endif %} -->
 <!-- Gitalk end -->
 
  <!-- disqus 评论框 start  -->
-{% if site.disqus.enable %}
+<!-- {% if site.disqus.enable %}
 
 <div class="comment">
     <div id="disqus_thread" class="disqus-thread">
     </div>
-</div>
+</div> -->
 <!-- disqus 评论框 end -->
 
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "{{site.disqus.username}}";
     var disqus_identifier = "{{site.disqus.username}}/{{page.url}}";
@@ -140,7 +137,7 @@ header-img: "img/post-bg-metro.jpg"
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
-</script>
+</script> -->
 <!-- disqus 公共JS代码 end -->
 {% endif %}
 
