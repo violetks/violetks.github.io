@@ -12,8 +12,8 @@ tags:
 
 > 路由重新渲染了视图，不是真正的页面跳转
 
-### 一、<router-link :to="...">标签，默认渲染成<a>标签
-to里的值可以是一个字符串路径，或者一个描述地址的对象。
+### 一、router-link :to="..." 标签，默认渲染成 a 标签
+to里的值可以是一个字符串路径，或者一个描述地址的对象。<br>
 **1.不带参数跳转**
 ```html
 // 字符串
@@ -27,7 +27,7 @@ to里的值可以是一个字符串路径，或者一个描述地址的对象。
 ```html
 <!-- 首页 -->
 // path + query，地址栏变成  /about?id=1&name=xx
-<router-link :to="{path: '/about', query: {id:1,name:'xx'} }">跳转到about页面</router-link>
+<router-link :to="{path: '/about', query: {id:1,name:'xx'}}">跳转到about页面</router-link>
 // name + query，命名路由
 <router-link :to="{name: 'about', query: {id:1,name:'xx'}}">跳转到about页面</router-link>
 // path + params，这里提供了 path，params 会被忽略不生效
@@ -40,17 +40,14 @@ to里的值可以是一个字符串路径，或者一个描述地址的对象。
 <script>
 export default {
   name: "about",
-  data() {
-    return {};
-  },
   created() {
     // 以query方式接收参数：通过URL传递，类似get方式
-	console.log(this.$route.query.id);
-	console.log(this.$route.query.name);
+    console.log(this.$route.query.id);
+    console.log(this.$route.query.name);
 	
-	// 以params方式接收参数：类似post方式
-	console.log(this.$route.params.id);
-	console.log(this.$route.params.name);
+    // 以params方式接收参数：类似post方式
+    console.log(this.$route.params.id);
+    console.log(this.$route.params.name);
   }
 }
 </script>
@@ -65,15 +62,12 @@ export default {
 <script>
 export default {
   name: "index",
-  data( {
-    return {};
-  },
   methods: {
     open() {
 	  this.$router.push('/about');           // 字符串
 	  this.$router.push({path:'/about'});    // 对象
 	  this.$router.push({name:'about'});     // 命名路由
-	}
+    }
   }
 }
 </script>
@@ -89,31 +83,22 @@ export default {
 <script>
 export default {
   name: "index",
-  data( {
-    return {};
-  },
   methods: {
     // query方式
     open1() {
 	  this.$router.push({
 	    path:'/about',
-		query: {
-		  id: 1,
-		  name: "xx"
-		}
+	    query: {id: 1,name: "xx"}
 	  });
-	},
+    },
 	
-	// params方式
+    // params方式
     open2() {
 	  this.$router.push({
 	    name:'about',     // 这里只能用name
-		params: {
-		  id: 1,
-		  name: "xx"
-		}
+	    params: {id: 1,name: "xx"}
 	  });
-	}
+    }
   }
 }
 </script>
@@ -123,17 +108,14 @@ export default {
 <script>
 export default {
   name: "about",
-  data() {
-    return {};
-  },
   created() {
     // 以query方式接收参数：通过URL传递，类似get方式
-	console.log(this.$route.query.id);
-	console.log(this.$route.query.name);
+    console.log(this.$route.query.id);
+    console.log(this.$route.query.name);
 	
-	// 以params方式接收参数：类似post方式
-	console.log(this.$route.params.id);
-	console.log(this.$route.params.name);
+    // 以params方式接收参数：类似post方式
+    console.log(this.$route.params.id);
+    console.log(this.$route.params.name);
   }
 }
 </script>
@@ -152,9 +134,7 @@ export default {
 {
   path: "/home",
   name: "home",
-  meta: {
-    isAuth:true
-  },
+  meta: { isAuth:true },
   component: () => import('@/pages/homes/home/index.vue')
 }
 ```
