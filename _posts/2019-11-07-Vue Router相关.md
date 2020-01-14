@@ -12,11 +12,7 @@ tags:
 
 > 路由重新渲染了视图，不是真正的页面跳转
 
-<<<<<<< HEAD
 ### 一、`<router-link :to="...">`标签，默认渲染成`<a>`标签
-=======
-### 一、router-link :to="..." 标签，默认渲染成 a 标签
->>>>>>> 65576d3818df62d7d8130f5ccf0e8bd49f7fcde1
 to里的值可以是一个字符串路径，或者一个描述地址的对象。<br>
 **1.不带参数跳转**
 ```html
@@ -68,9 +64,9 @@ export default {
   name: "index",
   methods: {
     open() {
-	  this.$router.push('/about');           // 字符串
-	  this.$router.push({path:'/about'});    // 对象
-	  this.$router.push({name:'about'});     // 命名路由
+      this.$router.push('/about');           // 字符串
+      this.$router.push({path:'/about'});    // 对象
+      this.$router.push({name:'about'});     // 命名路由
     }
   }
 }
@@ -90,18 +86,18 @@ export default {
   methods: {
     // query方式
     open1() {
-	  this.$router.push({
-	    path:'/about',
-	    query: {id: 1,name: "xx"}
-	  });
+      this.$router.push({
+        path:'/about',
+        query: {id: 1,name: "xx"}
+      });
     },
 	
     // params方式
     open2() {
-	  this.$router.push({
-	    name:'about',     // 这里只能用name
-	    params: {id: 1,name: "xx"}
-	  });
+      this.$router.push({
+        name:'about',     // 这里只能用name
+        params: {id: 1,name: "xx"}
+      });
     }
   }
 }
@@ -126,11 +122,11 @@ export default {
 ```
 
 ### 三、Vue2.0中$router和$route的区别
-（1）`$router`是VueRouter的实例，是一个**全局对象**，包含了所有路由关键的对象和属性。<br>
+1. `$router`是VueRouter的实例，是一个**全局对象**，包含了所有路由关键的对象和属性。<br>
 `this.$router.push({path:'home'});`本质是向history栈中添加一个记录，点击后退会返回到上一个页面。<br>
 `this.$router.replace({path:'home'});` 替换路由，没有历史记录，一般使用replace来做404页面 `this.$router.replace('/')`。<br>
 `this.$router.go(-1)`，后退。<br>
-（2）`$route`是一个跳转到的对象，每一个路由都会有一个route对象，是一个**局部对象**，可以获取对应的`name`,`path`,`params`,`query`等。<br>
+2. `$route`是一个跳转到的对象，每一个路由都会有一个route对象，是一个**局部对象**，可以获取对应的`name`,`path`,`params`,`query`等。<br>
 
 ### 四、验证登录后才可以点击查看页面
 ```javascript
@@ -152,6 +148,7 @@ export default {
 ### 六、真正的页面跳转
 ```javascript
 <a target="_blank" href="url">超链接</a>
+
 // 在当前页面打开
 window.location.href = "https://www.baidu.com/s?wd=vue";
 // 打开一个新的浏览器窗口
