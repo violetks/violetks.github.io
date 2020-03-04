@@ -108,6 +108,9 @@ friends: [
         title: "CSDN",
         href: "https://www.csdn.net/"
     },{
+        title: "SegmentFault",
+        href: "https://segmentfault.com/"
+    },{
         title: "博客园",
         href: "https://www.cnblogs.com/"
     }
