@@ -2,7 +2,7 @@
 layout:     post
 title:      Vue Router相关
 subtitle:   Vue路由配置&页面跳转&参数传递
-date:       2019-11-07
+date:       2019-11-09
 author:     violetks
 header-img: img/post-violet.jpg
 catalog: true
