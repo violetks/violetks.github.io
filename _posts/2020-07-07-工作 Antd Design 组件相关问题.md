@@ -92,3 +92,40 @@ const hasSelected = selectedRowKeys.length > 0;
     )
   }
 ```
+
+### 三、`FormItem` 是 `<span>` 元素问题
+
+```javascript
+<FormItem name="schedTime" label="时间">
+  <span style={{ marginRight: (schedTime || time) ? 8 : 0 }}>{time ? time : schedTime}</span>
+  <Button type="primary" onClick={openDialog}>设置时间规则</Button>
+</FormItem>
+```
+
+**场景：**在 `FormItem` 里有一个 `<span>` 和 一个 `<Button>` ，点击按钮出现一个设置时间规则的组件，设置完成后的时间值，也就是一个字符串
+会在 `<span>` 中显示。最后和其他表单项的值一起提交给后端接口。<br>
+
+**问题一：**表单填写完提交时没有 `<span>` 元素中的值。<br>
+**原因：**因为 `form` 默认只将带 `name` 属性的 `input` 标签的值提交。`<span>` 元素没有这个属性，需要手动设置它的值。
+这里我是在打开设置时间规则组件时通过 `setFieldsValue` 将值赋给 `FormItem`。<br>
+
+```javascript
+  const getTimeRules = (value) => {
+    setTime(value);
+    form.setFieldsValue({ schedTime: value.trim() });
+    setVisibleDialog(false);
+  }
+```
+
+**问题二：**虽然时间值有了，但页面上不显示，不能及时改变，清空表单时时间值还在。<br>
+**解决方法：**定义了一个 `state` 变量 `time` ，用来显示的，实际传递给后端接口的还是 `schedTime`。<br>
+
+```javascript
+const [time, setTime] = useState("");
+
+// 清空表单和数据
+const clearForm = () => {
+  setTime("");
+  form.resetFields();
+}
+```
