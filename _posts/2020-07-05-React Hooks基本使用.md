@@ -29,10 +29,13 @@ function Example() {
   return (
     <div>
       <p>You clicked {count} times</p>
+
       <button onClick={() => setCount(count + 1)}>
        Click me
       </button>
+
     </div>
+
   );
 }
 ```
@@ -44,7 +47,7 @@ useEffect(() => {})
 ```
 
 `useEffect` 和React的生命周期相关，可看作是 `componentDidMount`，`componentDidUpdate` 和 `componentWillUnmount` 这三个函数的组合。<br>
-在执行DOM更新之后调用。默认情况下，每次渲染都会执行。** `effect` 是异步的。`useEffect` 会延迟执行。**<br>
+在执行DOM更新之后调用。默认情况下，每次渲染都会执行。`effect` 是异步的。`useEffect` 会延迟执行。<br>
 
 **清除机制：**如果 `effect` 返回一个函数，React 将会在执行清除操作时调用它：<br>
 
@@ -55,7 +58,7 @@ useEffect(() => {
 })
 ```
 
-**useEffect 的第二个参数：**是一个数组，传入副作用函数中使用到的数据变量，主要用于性能优化，防止进行重复渲染。依赖项数组不会作为参数传给 effect 函数。虽然从概念上来说它表现为：所有 `effect` 函数中引用的值都应该出现在依赖项数组中。<br>
+**useEffect 的第二个参数：**是一个数组，传入副作用函数中使用到的数据变量，主要用于性能优化，防止进行重复渲染。依赖项数组不会作为参数传给 `effect` 函数。虽然从概念上来说它表现为：所有 `effect` 函数中引用的值都应该出现在依赖项数组中。<br>
 
 ```javascript
 useEffect(() => {
@@ -69,8 +72,67 @@ useEffect(() => {
 
 ### 三、useContext
 
+如果需要在组件之间共享状态，或者跨级组件之间通信，可以使用 `useContext`。<br>
+
 ```javascript
 const value = useContext(MyContext);
+```
+
+接收一个 context 对象（`React.createContext` 的返回值）并返回该 context 的当前值。当前的 context 值由上层组件中距离当前组件最近的 `<MyContext.Provider>` 的 `value` prop 决定。
+
+当组件上层最近的 `<MyContext.Provider>` 更新时，该 Hook 会触发重渲染，并使用最新传递给 `MyContext` provider 的 context `value` 值。即使祖先使用 `React.memo` 或 `shouldComponentUpdate`，也会在组件本身使用 `useContext` 时重新渲染。
+
+**注意：** `useContext` 的参数必须是 context 对象本身：
+
+- 正确： `useContext(MyContext)`
+- 错误： `useContext(MyContext.Consumer)`
+- 错误： `useContext(MyContext.Provider)`
+
+简单来说，在上层组件树中使用 `<MyContext.Provider>` 来为下层组件提供 context。<br>
+在下层组件中使用 `useContext` 获取 context 对象。<br>
+当组件上层最近的 `<MyContext.Provider>` 更新时，该 Hook 会触发重渲染。<br>
+
+```javascript
+const themes = {
+  light: {
+    foreground: "#000000",
+    background: "#eeeeee"
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222"
+  }
+};
+
+// 一、在组件外部建立一个 context
+const ThemeContext = React.createContext(themes.light);
+
+// 二、Provider 提供了一个可以被子组件共享的对象
+function App() {
+  return (
+    <ThemeContext.Provider value={themes.dark}>
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+
+function Toolbar(props) {
+  return (
+    <div>
+      <ThemedButton />
+    </div>
+  );
+}
+
+// 三、子组件中使用 useContext 获取 theme 属性
+function ThemedButton() {
+  const theme = useContext(ThemeContext);
+  return (
+    <button style={{ background: theme.background, color: theme.foreground }}>
+      I am styled by theme context!
+    </button>
+  );
+}
 ```
 
 ### 四、useReducer
@@ -97,8 +159,11 @@ function Counter() {
     <>
       Count: {count}
       <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+
       <button onClick={() => dispatch({type: 'increment'})}>+</button>
+
     </>
+
   );
 }
 ```
@@ -143,7 +208,9 @@ function Example() {
     <>
       <input ref={inputEl} type="text" />
       <button onClick={onButtonClick}>在input上展示文字</button>
+
     </>
+
   );
 }
 ```

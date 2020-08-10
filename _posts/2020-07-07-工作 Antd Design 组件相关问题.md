@@ -15,17 +15,17 @@ tags:
 
 `Alert` 组件的 `message` 中除了接收字符串外，还能接收DOM节点。<br>
 
-```javascript
+```html,javascript
 const hasSelected = selectedRowKeys.length > 0;
 
-<div style={{ display: hasSelected ? 'block' : 'none', marginBottom: '16px' }}>
+<div style={% raw %}{{ display: hasSelected ? 'block' : 'none', marginBottom: '16px' }}{% endraw %}>
   <Alert
     message={
      <p>
        <span>已选择 {selectedRowKeys.length} 项</span>
-       <a onClick={resetChecked} style={{ marginLeft: '24px' }}>清空</a>
-     </p>
-    }
+	   <a onClick={resetChecked} style={% raw %}{{ marginLeft: '24px' }}{% raw %}>清空</a>
+	 </p>
+	}
     type="info"
     showIcon
    />
@@ -36,7 +36,7 @@ const hasSelected = selectedRowKeys.length > 0;
 
 收起时只显示前两个 `FormItem` ，展开显示全部。<br>
 
-```javascript
+```html,javascript
   const [expand, setExpand] = useState(false);
 
   // 搜索框结构样式
@@ -50,6 +50,7 @@ const hasSelected = selectedRowKeys.length > 0;
                 <Input placeholder="请输入用户名称" />
               </Form.Item>
             </Col>
+
             <Col span={8}>
               <Form.Item name="status" label="状态">
                 <Select placeholder="请选择状态" allowClear={true}>
@@ -58,7 +59,8 @@ const hasSelected = selectedRowKeys.length > 0;
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+
+            <Col span={8} style={% raw %}{{ display: expand ? 'block' : 'none' }}{% endraw %}>
               <Form.Item name="classId" label="所属班级">
                 <Select placeholder="请选择班级" allowClear={true}>
                   {
@@ -69,7 +71,8 @@ const hasSelected = selectedRowKeys.length > 0;
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+
+            <Col span={8} style={% raw %}{{ display: expand ? 'block' : 'none' }}{% endraw %}>
               <Form.Item name="gradeId" label="所属年级">
                 <Select placeholder="请选择所属年级" allowClear={true}>
                   {
@@ -80,7 +83,8 @@ const hasSelected = selectedRowKeys.length > 0;
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={expand ? 16 : 8} style={{ textAlign: expand ? "right" : "left" }}>
+
+            <Col span={expand ? 16 : 8} style={% raw %}{{ textAlign: expand ? "right" : "left" }}{% endraw %}>
               <Button type="primary" htmlType="submit">查询</Button>
               <Button style={{ marginLeft: 8 }} onClick={handleReset}>重置</Button>
               <Button type="link" onClick={() => { setExpand(!expand) }}>
@@ -95,15 +99,14 @@ const hasSelected = selectedRowKeys.length > 0;
 
 ### 三、`FormItem` 是 `<span>` 元素问题
 
-```javascript
+```html,javascript
 <FormItem name="schedTime" label="时间">
-  <span style={{ marginRight: (schedTime || time) ? 8 : 0 }}>{time ? time : schedTime}</span>
+  <span style={% raw %}{{ marginRight: (schedTime || time) ? 8 : 0 }}{% endraw %}>{time ? time : schedTime}</span>
   <Button type="primary" onClick={openDialog}>设置时间规则</Button>
 </FormItem>
 ```
 
-**场景：**在 `FormItem` 里有一个 `<span>` 和 一个 `<Button>` ，点击按钮出现一个设置时间规则的组件，设置完成后的时间值，也就是一个字符串
-会在 `<span>` 中显示。最后和其他表单项的值一起提交给后端接口。<br>
+**场景：**在 `FormItem` 里有一个 `<span>` 和 一个 `<Button>` ，点击按钮出现一个设置时间规则的组件，设置完成后的时间值，也就是一个字符串会在 `<span>` 中显示。最后和其他表单项的值一起提交给后端接口。<br>
 
 **问题一：**表单填写完提交时没有 `<span>` 元素中的值。<br>
 **原因：**因为 `form` 默认只将带 `name` 属性的 `input` 标签的值提交。`<span>` 元素没有这个属性，需要手动设置它的值。
