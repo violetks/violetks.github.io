@@ -20,7 +20,7 @@ const [state, setState] = useState(initialState);
 用于在函数组件中定义 `state变量`，React 会在重复渲染时保留这个 `state`。<br>
 `useState` 传入参数是 `state` 的初始值，并返回一个数组：当前状态和一个更新它的函数，你可以在事件处理函数中或其他一些地方调用这个函数。<br>
 
-```javascript
+```html
 import React, { useState } from 'react';
 
 function Example() {
@@ -29,13 +29,10 @@ function Example() {
   return (
     <div>
       <p>You clicked {count} times</p>
-
       <button onClick={() => setCount(count + 1)}>
        Click me
       </button>
-
     </div>
-
   );
 }
 ```
@@ -92,7 +89,7 @@ const value = useContext(MyContext);
 在下层组件中使用 `useContext` 获取 context 对象。<br>
 当组件上层最近的 `<MyContext.Provider>` 更新时，该 Hook 会触发重渲染。<br>
 
-```javascript
+```html
 const themes = {
   light: {
     foreground: "#000000",
@@ -113,6 +110,7 @@ function App() {
     <ThemeContext.Provider value={themes.dark}>
       <Toolbar />
     </ThemeContext.Provider>
+
   );
 }
 
@@ -121,6 +119,7 @@ function Toolbar(props) {
     <div>
       <ThemedButton />
     </div>
+
   );
 }
 
@@ -128,9 +127,10 @@ function Toolbar(props) {
 function ThemedButton() {
   const theme = useContext(ThemeContext);
   return (
-    <button style={{ background: theme.background, color: theme.foreground }}>
+    <button style={% raw %}{{ background: theme.background, color: theme.foreground }}{% endraw %}>
       I am styled by theme context!
     </button>
+
   );
 }
 ```
@@ -143,7 +143,7 @@ const [state, dispatch] = useReducer(reducer, initialArg, init);
 
 `useState` 的替代方案。适用于 `state` 逻辑较复杂且包含多个子值，或者下一个 `state` 依赖于之前的 `state` 等。<br>
 
-```javascript
+```html
 // 计数器
 function reducer(state, action) {
   switch (action.type) {
@@ -159,11 +159,8 @@ function Counter() {
     <>
       Count: {count}
       <button onClick={() => dispatch({type: 'decrement'})}>-</button>
-
       <button onClick={() => dispatch({type: 'increment'})}>+</button>
-
     </>
-
   );
 }
 ```
@@ -197,7 +194,7 @@ const refContainer = useRef(initialValue);
 
 #### useRef获取DOM元素
 
-```javascript
+```html
 function Example() {
   const inputEl = useRef(null);
   const onButtonClick = () => {
@@ -208,9 +205,7 @@ function Example() {
     <>
       <input ref={inputEl} type="text" />
       <button onClick={onButtonClick}>在input上展示文字</button>
-
     </>
-
   );
 }
 ```

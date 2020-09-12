@@ -15,7 +15,7 @@ tags:
 
 `Alert` 组件的 `message` 中除了接收字符串外，还能接收DOM节点。<br>
 
-```html,javascript
+```html
 const hasSelected = selectedRowKeys.length > 0;
 
 <div style={% raw %}{{ display: hasSelected ? 'block' : 'none', marginBottom: '16px' }}{% endraw %}>
@@ -23,9 +23,9 @@ const hasSelected = selectedRowKeys.length > 0;
     message={
      <p>
        <span>已选择 {selectedRowKeys.length} 项</span>
-	   <a onClick={resetChecked} style={% raw %}{{ marginLeft: '24px' }}{% raw %}>清空</a>
-	 </p>
-	}
+       <a onClick={resetChecked} style={% raw %}{{ marginLeft: '24px' }}{% endraw %}>清空</a>
+     </p>
+    }
     type="info"
     showIcon
    />
@@ -34,9 +34,9 @@ const hasSelected = selectedRowKeys.length > 0;
 
 ### 二、`Form` 表单高级搜索
 
-收起时只显示前两个 `FormItem` ，展开显示全部。<br>
+收起时只显示前两个 `Form.Item` ，展开显示全部。<br>
 
-```html,javascript
+```html
   const [expand, setExpand] = useState(false);
 
   // 搜索框结构样式
@@ -97,13 +97,13 @@ const hasSelected = selectedRowKeys.length > 0;
   }
 ```
 
-### 三、`FormItem` 是 `<span>` 元素问题
+### 三、`Form.Item` 是 `<span>` 元素问题
 
-```html,javascript
-<FormItem name="schedTime" label="时间">
+```html
+<Form.Item name="schedTime" label="时间">
   <span style={% raw %}{{ marginRight: (schedTime || time) ? 8 : 0 }}{% endraw %}>{time ? time : schedTime}</span>
   <Button type="primary" onClick={openDialog}>设置时间规则</Button>
-</FormItem>
+</Form.Item>
 ```
 
 **场景：**在 `FormItem` 里有一个 `<span>` 和 一个 `<Button>` ，点击按钮出现一个设置时间规则的组件，设置完成后的时间值，也就是一个字符串会在 `<span>` 中显示。最后和其他表单项的值一起提交给后端接口。<br>
@@ -131,4 +131,43 @@ const clearForm = () => {
   setTime("");
   form.resetFields();
 }
+```
+
+### 四、`Form.Item`内有多个元素，控制台报错。
+
+![di4XQI.png](https://s1.ax1x.com/2020/08/15/di4XQI.png)
+
+`<Form.Item name="field" />` 只会对它的直接子元素绑定表单功能，例如直接包裹了 Input/Select。如果控件前后还有一些文案或样式装点，或者一个表单项内有多个控件，你可以使用内嵌的 `Form.Item` 完成。你可以给 `Form.Item` 自定义 `style` 进行内联布局，或者添加 `noStyle` 作为纯粹的无样式绑定组件（类似 3.x 中的 `getFieldDecorator`）。<br>
+
+根据官网介绍，将第三点中 `Form.Item` 的结构改为如下形式，就没有上面的错误了。<br>
+
+```html
+<FormItem label="时间">
+  <FormItem name="schedTime" noStyle>
+    <span style={% raw %}{{ marginRight: (schedTime || time) ? 8 : 0 }}{% endraw %}>{time ? time : schedTime}</span>
+  </FormItem>
+  <Button type="primary" onClick={openDialog}>设置时间规则</Button>
+</FormItem>
+```
+
+### 五、`Form.Item`下的子组件`defaultValue`不生效
+
+```html
+<FormItem name="num" label="数字">
+  <InputNumber min={0} max={255} defaultValue={0} />
+</FormItem>
+```
+
+一开始我使用上面的方法给 `InputNumber` 设置了初始值，但没有生效，控制台还报错。<br>
+
+![di4jyt.png](https://s1.ax1x.com/2020/08/15/di4jyt.png)
+
+官网里有提到这个问题：当你为 `Form.Item` 设置 `name` 属性后，子组件会转为受控模式。因而 `defaultValue` 不会生效。你需要在 `Form` 上通过 `initialValues` 设置默认值。<br>
+
+```html
+<Form initialValues={{ num: 0 }}>
+  <FormItem name="num" label="数字">
+    <InputNumber min={0} max={255} />
+  </FormItem>
+</Form>
 ```
