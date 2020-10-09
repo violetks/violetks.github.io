@@ -171,3 +171,136 @@ const clearForm = () => {
   </FormItem>
 </Form>
 ```
+
+### 六、`Form.Item`的 `noStyle` 属性
+
+为 `true` 时不带样式。可编辑表格中的 `Form.Item` 设置 `noStyle` 之后，校验时不会出现下图中的效果。<br>
+
+![09Gn3R.png](https://s1.ax1x.com/2020/09/25/09Gn3R.png)
+
+### 七、 编辑页`Select` 下拉框回显id问题
+
+**场景：**新增和编辑共用一个表单，下拉框之间有联动的效果，先选择某个年级，才能选择这个年级下的某个班级，接着才能选择这个班级下的某个学生。也就是三个下拉框之间的联动，下图有点问题...<br>
+**注意：**第一个和第二个下拉框编辑需要回显名称，实际传给接口的值是对应id，第三个下拉框显示名称，传的值也是名称。<br>
+**问题：**最初第一个和第二个下拉框都是用 `onChange` 事件，实现第一个下拉框值改变时获取到第二个下拉框下拉选项，这样刚进入编辑页回显时第二个下拉框回显的是id而不是班级名称。<br>
+**原因：**刚进入编辑页第一个下拉框的 `onChange` 事件没有触发，第二个下拉框数组没有值。<br>
+
+新增页：<br>
+
+![wcoens.png](https://s1.ax1x.com/2020/09/16/wcoens.png)
+
+编辑页：<br>
+
+![wcomBn.png](https://s1.ax1x.com/2020/09/16/wcomBn.png)
+
+**解决：**将下拉框中的 `onChange` 事件在 `useEffect` 中调用，主要代码如下。<br>
+
+```html
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'dva';
+import { Form, Select, Button } from 'antd';
+import { history, useLocation } from 'umi';
+
+const FormItem = Form.Item;
+const { Option } = Select;
+
+const UpdatePage = () => {
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const { query: { id } } = useLocation();
+  
+  const gradeId = form.getFieldValue("gradeId");
+  const classId = form.getFieldValue("classId");
+  
+  const { info, classList } = useSelector(state => state.student); // 某个年级下所有班级
+
+  // 编辑表单回显
+  useEffect(() => {
+    if (id) {
+      dispatch({...});
+
+      if (gradeId) {
+        getClassList(gradeId)
+      }
+    }
+  }, [id, gradeId])
+
+  return (
+    <Form form={form} onFinish={update}>
+      <FormItem name="gradeId" label="年级">
+        <Select allowClear placeholder="请选择"
+          onChange={(key) => { getClassList(key) }}>
+          {
+            gradeList.map(type =>
+              <Option key={type.fieldKey} value={type.fieldKey}>{type.fieldValue}</Option>
+            )
+          }
+        </Select>
+      </FormItem>
+
+      <FormItem name="classId" label="班级名称">
+        <Select allowClear placeholder="请选择" disabled={!gradeId}
+          onChange={(key) => { getStudent(key) }}>
+          {
+            classList.map(type =>
+              <Option key={type.fieldKey} value={type.fieldKey}>{type.fieldValue}</Option>
+            )
+          }
+        </Select>
+      </FormItem>
+
+      <FormItem name="student" label="学生姓名">
+        <Select allowClear mode="multiple" placeholder="请选择" disabled={!classId}>
+          {
+            studentList.map(item =>
+              <Option key={item} value={item}>{item}</Option>
+            )
+          }
+        </Select>
+      </FormItem>
+
+      <FormItem>
+        <Button onClick={clearForm}>取消</Button>
+        <Button type="primary" htmlType="submit">确定</Button>
+      </FormItem>
+    </Form>
+  )
+};
+
+export default UpdatePage;
+```
+
+### 七、`Select` 的 `onChange` 事件的两个参数
+
+`Select` 下拉框的 `onChange` 事件，官方说明是 **选中 `option`，或 `input` 的 `value` 变化时，调用此函数。**<br>
+
+```javascript
+function(value, option:Option | Array<Option>)
+```
+
+也就是说，接收两个参数 `value` 和 `option`，`option` 可以是一个对象或者对象数组。<br>
+之前一直只用到 `value` 参数，某天打印出了 `option` 对象时就有点迷惑。<br>
+
+```html
+<Select onChange={(value, option) => {
+  console.log(value);
+  console.log(option);
+  fn1(option.key);
+  fn2(option.value);
+}}>
+  {
+    userList.map(item =>
+      <Option key={item.userId} value={item.userName}>{item.userName}</Option>
+    )
+  }
+</Select>
+```
+
+```javascript
+// 打印出的 option 对象
+{
+  key: "1462050266472448",
+  value: "jack"
+  children: "jack"
+}
+```
