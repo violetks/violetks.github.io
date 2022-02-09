@@ -190,9 +190,9 @@ const fnA = useCallback(fnB,[a])
 const refContainer = useRef(initialValue);
 ```
 
-`useRef` 像一个变量，类似于 `this`，`useRef` 返回一个可变的 `ref` 对象。<br>
+`useRef` 像一个变量，类似于 `this`，`useRef` 返回一个可变的 `ref` 对象，其 `.current` 属性被初始化为传入的参数（`initialValue`）。**返回的 `ref` 对象在组件的整个生命周期内保持不变。`useRef()` 和自建一个 `{current:...}` 对象的唯一区别：`useRef()` 会在每次渲染时返回同一个 `ref` 对象。**<br>
 
-#### useRef获取DOM元素
+#### 常见用例：命令式地访问子组件，useRef获取DOM元素
 
 ```html
 function Example() {
