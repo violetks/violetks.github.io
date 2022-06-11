@@ -20,7 +20,17 @@ tags:
 #### 3、字符串：`let name: string = "Angle"`
 #### 4、数组：两种方式定义数组。
 （1）`let list: number[] = [1, 2, 3];`<br>
-（2）使用数组泛型：`let list: Array<number> = [1, 2, 3];`<br>
+（2）使用数组泛型：<br>
+```javascript
+let list: Array<number> = [1, 2, 3];
+let ro: ReadonlyArray<number> = [1, 2]; // 只读，不能修改
+ro[0] = 12; // error!
+list = ro; // error!
+```
+上面代码的最后一行，可以看到就算把整个 `ReadonlyArray` 赋值到一个普通数组也是不可以的。 但是你可以用类型断言重写：<br>
+```javascript
+list = ro as number[];
+```
 #### 5、元组Tuple：一个已知元素数量和类型的数组，各元素的类型不必相同。
 ```javascript
 let list: [string, number]; // 声明一个元组类型
@@ -71,3 +81,53 @@ let strLength: number = (<string>someValue).length;
 # as 语法：
 let strLength: number = (someValue as string).length;
 ```
+
+### 三、接口
+#### 1、使用接口描述带有属性的普通对象
+```javascript
+// 声明一个接口
+interface Person {
+  name: string;
+  sex: string;
+  age: number;
+  color?: string; // 可选属性
+  readonly height: numner; // 只读属性
+}
+// 使用接口
+const obj: Person = {
+  name: '张三',
+  sex: '男',
+  age: 30
+}
+```
+使用接口时如果传入额外属性会报错，有两种解决方法：<br>
+（1）使用类型断言；<br>
+（2）接口中添加一个字符串索引签名：<br>
+```javascript
+interface SquareConfig {
+  color?: string;
+  width?: number;
+  [propName: string]: any;
+}
+```
+#### 2、使用接口描述函数类型
+```javascript
+interface SearchFunc {
+  (source: string, subString: string): boolean;
+}
+// 使用函数类型接口
+let mySearch: SearchFunc;
+mySearch = function (src: string, sub: string) {
+  let res = src.search(sub);
+  return res > -1;
+}
+```
+#### 3、可索引的类型
+```javascript
+interface StringArray {
+  [index: number]: string;
+}
+let myArray: StringArray = ['Bob', 'Fred'];
+let myStr: string = myArray[0];
+```
+上面例子里，我们定义了 `StringArray` 接口，它具有索引签名。这个索引签名表示了当用 `number` 去索引 `StringArray` 时会得到 `string` 类型的返回值。<br>
