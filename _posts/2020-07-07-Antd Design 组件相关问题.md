@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      工作 Antd Design 组件相关问题
+title:      Antd Design 组件相关问题
 date:       2020-07-07
 author:     violetks
 header-img: img/post-bg-ioses.jpg
@@ -8,28 +8,21 @@ catalog: true
 tags:
     - React
     - Antd Design
-    - < 工作问题记录 >
 ---
 
-### 一、`Alert` 组件默认隐藏
-
-`Alert` 组件的 `message` 中除了接收字符串外，还能接收DOM节点。<br>
+### 一、`Alert` 组件的 `message` 中除了接收字符串外，还能接收DOM节点。<br>
 
 ```html
-const hasSelected = selectedRowKeys.length > 0;
-
-<div style={% raw %}{{ display: hasSelected ? 'block' : 'none', marginBottom: '16px' }}{% endraw %}>
-  <Alert
-    message={
-     <p>
-       <span>已选择 {selectedRowKeys.length} 项</span>
-       <a onClick={resetChecked} style={% raw %}{{ marginLeft: '24px' }}{% endraw %}>清空</a>
-     </p>
-    }
-    type="info"
-    showIcon
-   />
-</div>
+<Alert
+  message={
+   <p>
+     <span>已选择 {selectedRowKeys.length} 项</span>
+     <a onClick={resetChecked} style={% raw %}{{ marginLeft: '24px' }}{% endraw %}>清空</a>
+   </p>
+  }
+  type="info"
+  showIcon
+ />
 ```
 
 ### 二、`Form` 表单高级搜索
@@ -37,64 +30,64 @@ const hasSelected = selectedRowKeys.length > 0;
 收起时只显示前两个 `Form.Item` ，展开显示全部。<br>
 
 ```html
-  const [expand, setExpand] = useState(false);
+const [expand, setExpand] = useState(false);
 
-  // 搜索框结构样式
-  const renderForm = () => {
-    return (
-        <Form form={form} onFinish={handleSearch}>
-          <Row gutter={24}>
-            <Col span={8}>
-              <Form.Item name="userName" label="用户名称"
-                getValueFromEvent={event => event.target.value.trim()}>
-                <Input placeholder="请输入用户名称" />
-              </Form.Item>
-            </Col>
+// 搜索框结构样式
+const renderForm = () => {
+  return (
+    <Form form={form} onFinish={handleSearch}>
+      <Row gutter={24}>
+        <Col span={8}>
+          <Form.Item name="userName" label="用户名称"
+            getValueFromEvent={event => event.target.value.trim()}>
+            <Input placeholder="请输入用户名称" />
+          </Form.Item>
+        </Col>
 
-            <Col span={8}>
-              <Form.Item name="status" label="状态">
-                <Select placeholder="请选择状态" allowClear={true}>
-                  <Option value="1">已启用</Option>
-                  <Option value="0">未启用</Option>
-                </Select>
-              </Form.Item>
-            </Col>
+        <Col span={8}>
+          <Form.Item name="status" label="状态">
+            <Select placeholder="请选择状态" allowClear={true}>
+              <Option value="1">已启用</Option>
+              <Option value="0">未启用</Option>
+            </Select>
+          </Form.Item>
+        </Col>
 
-            <Col span={8} style={% raw %}{{ display: expand ? 'block' : 'none' }}{% endraw %}>
-              <Form.Item name="classId" label="所属班级">
-                <Select placeholder="请选择班级" allowClear={true}>
-                  {
-                    classList.map(type =>
-                      <Option key={type.fieldKey} value={type.fieldKey}>{type.fieldValue}</Option>
-                    )
-                  }
-                </Select>
-              </Form.Item>
-            </Col>
+        <Col span={8} style={% raw %}{{ display: expand ? 'block' : 'none' }}{% endraw %}>
+          <Form.Item name="classId" label="所属班级">
+            <Select placeholder="请选择班级" allowClear={true}>
+              {
+                classList.map(type =>
+                  <Option key={type.fieldKey} value={type.fieldKey}>{type.fieldValue}</Option>
+                )
+              }
+            </Select>
+          </Form.Item>
+        </Col>
 
-            <Col span={8} style={% raw %}{{ display: expand ? 'block' : 'none' }}{% endraw %}>
-              <Form.Item name="gradeId" label="所属年级">
-                <Select placeholder="请选择所属年级" allowClear={true}>
-                  {
-                    gradeList.map(type =>
-                      <Option key={type.fieldKey} value={type.fieldKey}>{type.fieldValue}</Option>
-                    )
-                  }
-                </Select>
-              </Form.Item>
-            </Col>
+        <Col span={8} style={% raw %}{{ display: expand ? 'block' : 'none' }}{% endraw %}>
+          <Form.Item name="gradeId" label="所属年级">
+            <Select placeholder="请选择所属年级" allowClear={true}>
+              {
+                gradeList.map(type =>
+                  <Option key={type.fieldKey} value={type.fieldKey}>{type.fieldValue}</Option>
+                )
+              }
+            </Select>
+          </Form.Item>
+        </Col>
 
-            <Col span={expand ? 16 : 8} style={% raw %}{{ textAlign: expand ? "right" : "left" }}{% endraw %}>
-              <Button type="primary" htmlType="submit">查询</Button>
-              <Button style={{ marginLeft: 8 }} onClick={handleReset}>重置</Button>
-              <Button type="link" onClick={() => { setExpand(!expand) }}>
-                {expand ? <span>收起<UpOutlined /></span> : <span>展开<DownOutlined /></span>}
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-    )
-  }
+        <Col span={expand ? 16 : 8} style={% raw %}{{ textAlign: expand ? "right" : "left" }}{% endraw %}>
+          <Button type="primary" htmlType="submit">查询</Button>
+          <Button style={% raw %}{{ marginLeft: 8 }}{% endraw %} onClick={handleReset}>重置</Button>
+          <Button type="link" onClick={() => { setExpand(!expand) }}>
+            {expand ? <span>收起<UpOutlined /></span> : <span>展开<DownOutlined /></span>}
+          </Button>
+        </Col>
+      </Row>
+    </Form>
+  )
+}
 ```
 
 ### 三、`Form.Item` 是 `<span>` 元素问题
@@ -113,11 +106,11 @@ const hasSelected = selectedRowKeys.length > 0;
 这里我是在打开设置时间规则组件时通过 `setFieldsValue` 将值赋给 `FormItem`。<br>
 
 ```javascript
-  const getTimeRules = (value) => {
-    setTime(value);
-    form.setFieldsValue({ schedTime: value.trim() });
-    setVisibleDialog(false);
-  }
+const getTimeRules = value => {
+  setTime(value);
+  form.setFieldsValue({ schedTime: value.trim() });
+  setVisibleDialog(false);
+}
 ```
 
 **问题二：**虽然时间值有了，但页面上不显示，不能及时改变，清空表单时时间值还在。<br>
@@ -167,7 +160,7 @@ const clearForm = () => {
 官网里有提到这个问题：当你为 `Form.Item` 设置 `name` 属性后，子组件会转为受控模式。因而 `defaultValue` 不会生效。你需要在 `Form` 上通过 `initialValues` 设置默认值。<br>
 
 ```html
-<Form initialValues={{ num: 0 }}>
+<Form initialValues={% raw %}{{ num: 0 }}{% endraw %}>
   <FormItem name="num" label="数字">
     <InputNumber min={0} max={255} />
   </FormItem>
@@ -213,10 +206,10 @@ const UpdatePage = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { query: { id } } = useLocation();
-  
+
   const gradeId = form.getFieldValue("gradeId");
   const classId = form.getFieldValue("classId");
-  
+
   const { info, classList } = useSelector(state => state.student); // 某个年级下所有班级
 
   // 编辑表单回显
@@ -234,7 +227,7 @@ const UpdatePage = () => {
     <Form form={form} onFinish={update}>
       <FormItem name="gradeId" label="年级">
         <Select allowClear placeholder="请选择"
-          onChange={(key) => { getClassList(key) }}>
+          onChange={key => getClassList(key)}>
           {
             gradeList.map(type =>
               <Option key={type.fieldKey} value={type.fieldKey}>{type.fieldValue}</Option>
@@ -245,7 +238,7 @@ const UpdatePage = () => {
 
       <FormItem name="classId" label="班级名称">
         <Select allowClear placeholder="请选择" disabled={!gradeId}
-          onChange={(key) => { getStudent(key) }}>
+          onChange={key => getStudent(key)}>
           {
             classList.map(type =>
               <Option key={type.fieldKey} value={type.fieldKey}>{type.fieldValue}</Option>
@@ -287,12 +280,14 @@ function(value, option:Option | Array<Option>)
 之前一直只用到 `value` 参数，某天打印出了 `option` 对象时就有点迷惑。<br>
 
 ```html
-<Select onChange={(value, option) => {
-  console.log(value);
-  console.log(option);
-  fn1(option.key);
-  fn2(option.value);
-}}>
+<Select
+  onChange={(value, option) => {
+    console.log(value);
+    console.log(option);
+    fn1(option.key);
+    fn2(option.value);
+  }}
+>
   {
     userList.map(item =>
       <Option key={item.userId} value={item.userName}>{item.userName}</Option>

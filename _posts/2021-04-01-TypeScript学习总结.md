@@ -208,7 +208,7 @@ enum Color {
   Blue = getSomeValue()
 }
 ```
-2、字符串枚举
+2、字符串枚举<br>
 3、异构枚举，不常用
 ```javascript
 enum BooleanLikeHeterogeneousEnum {
