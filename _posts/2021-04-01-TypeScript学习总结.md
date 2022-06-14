@@ -184,3 +184,36 @@ function myName (name: string, firstName = "Smith", lastName?: string) {}
 function myName (name: string, ...otherName: string[]) {}
 ```
 ### 五、泛型
+```javascript
+// 定义泛型函数
+function identity<T>(arg: T): T {
+    return arg;
+}
+// 使用
+let output = identity<string>("myString");
+let output = identity("myString"); // 类型推论，根据入参自动确定
+```
+### 六、枚举
+1、数字枚举
+```javascript
+enum Color {
+  Red = 1,
+  Green,
+  Blue
+}
+console.log(Color.Green); // 2
+enum Color {
+  Red,
+  Green,
+  Blue = getSomeValue()
+}
+```
+2、字符串枚举
+3、异构枚举，不常用
+```javascript
+enum BooleanLikeHeterogeneousEnum {
+  No = 0,
+  Yes = "YES",
+}
+```
+4、联合枚举与枚举成员的类型
