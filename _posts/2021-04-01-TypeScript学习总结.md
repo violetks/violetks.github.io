@@ -122,7 +122,7 @@ mySearch = function (src: string, sub: string) {
   return res > -1;
 }
 ```
-#### 3、可索引的类型
+#### 3、使用接口描述可索引的类型
 ```javascript
 interface StringArray {
   [index: number]: string;
@@ -131,3 +131,56 @@ let myArray: StringArray = ['Bob', 'Fred'];
 let myStr: string = myArray[0];
 ```
 上面例子里，我们定义了 `StringArray` 接口，它具有索引签名。这个索引签名表示了当用 `number` 去索引 `StringArray` 时会得到 `string` 类型的返回值。<br>
+#### 4、使用接口描述类类型
+与 `C#` 或 `Java` 里接口的基本作用一样， `TypeScript` 也能够用它来明确的强制一个类去符合某种契约。<br>
+```javascript
+interface ClockInterface {
+  currentTime: Date;
+  setTime(d: Date); // 在接口中描述一个方法
+}
+
+class Clock implements ClockInterface {
+  currentTime: Date;
+  // 在类里实现方法
+  setTime(d: Date) {
+    this.currentTime = d;
+  }
+  constructor(h: number, m: number) { }
+}
+```
+#### 5、继承接口
+和类一样，接口也可以相互继承。<br>
+```javascript
+interface Shape {
+  color: string;
+}
+interface PenStroke {
+  penWidth: number;
+}
+// 继承多个接口
+interface Square extends Shape, PenStroke {
+  sideLength: number;
+}
+let square = <Square>{};
+square.color = "blue";
+square.sideLength = 10;
+square.penWidth = 5.0;
+```
+#### 6、混合类型：例如一个对象可以同时作为函数和对象使用，并带有额外的属性。
+#### 7、接口继承类
+当接口继承了一个类类型时，它会继承类的成员但不包括其实现。接口同样会继承到类的private和protected成员。这意味着当你创建了一个接口继承了一个拥有私有或受保护的成员的类时，这个接口类型只能被这个类或其子类所实现。
+### 四、函数
+#### 1、函数类型
+```javascript
+// 匿名函数
+let myAdd: (x: number, y: number) => number =
+    function(x: number, y: number) : number { return x + y; };
+```
+#### 2、默认参数、可选参数、剩余参数
+```javascript
+// 可选参数必须放最后
+function myName (name: string, firstName = "Smith", lastName?: string) {}
+// 剩余参数
+function myName (name: string, ...otherName: string[]) {}
+```
+### 五、泛型
