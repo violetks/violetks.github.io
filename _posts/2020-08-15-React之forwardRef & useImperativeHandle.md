@@ -51,7 +51,7 @@ function FancyInput(props, ref) {
 FancyInput = forwardRef(FancyInput);
 ```
 
-在本例中，渲染 `<FancyInput ref={inputRef} />` 的父组件可以调用 `inputRef.current.focus()。`<br>
+在本例中，渲染 `<FancyInput ref={inputRef} />` 的父组件可以调用 `inputRef.current.focus()`。<br>
 
 ### 三、使用场景
 
@@ -68,7 +68,7 @@ const { Step } = Steps;
 
 const Parent = () => {
   const dispatch = useDispatch();
-  
+
   const [step, setStep] = useState(0);
   const [valueOne, setValueOne] = useState({});      // 子组件第一步表单值
   const [valueTwo, setValueTwo] = useState({});      // 子组件第二步表单值

@@ -216,4 +216,12 @@ enum BooleanLikeHeterogeneousEnum {
   Yes = "YES",
 }
 ```
-4、联合枚举与枚举成员的类型
+4、反向映射<br>
+数字枚举成员具有反向映射，字符串枚举成员不会生成反向映射。
+```javascript
+enum Enum {
+  A
+}
+let a = Enum.A;
+let nameOfA = Enum[a]; // "A"
+```
