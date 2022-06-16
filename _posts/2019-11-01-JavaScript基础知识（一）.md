@@ -1,13 +1,12 @@
 ---
 layout:     post
-title:      JS基础知识（一）
+title:      JavaScript基础知识（一）
 date:       2019-11-01
 author:     violetks
 header-img: img/post-bg-js-version.jpg
 catalog: true
 tags:
-    - JS
-    - 面试题
+    - JavaScript
     - 基础知识
 ---
 

@@ -1,13 +1,12 @@
 ---
 layout:     post
-title:      JS基础知识（二）
+title:      JavaScript基础知识（二）
 date:       2019-11-01
 author:     violetks
 header-img: img/post-bg-js-version.jpg
 catalog: true
 tags:
-    - JS
-    - 面试题
+    - JavaScript
     - 基础知识
 ---
 
@@ -299,10 +298,10 @@ f1().then(f2).fail(f3);
 函数前面多加 `async` 关键字，函数返回的是一个 **Promise** 对象，所接收的值就是函数 **return** 的值。<br>
 在 `async` 函数内部使用 `await` 命令，表示等待一个异步函数的返回。`await` 后面跟着的是一个 **Promise** 对象，如果不是的话，系统会调用 `Promise.resolve()` 方法，将其转为一个 `resolve` 的 **Promise** 对象。<br>
 ```javascript
-let bar = async function(){  
-    try{    
+let bar = async function(){
+    try{
         await Promise.reject('error')
-    }catch(e){    
+    }catch(e){
         console.log(e)
     }
 }
@@ -319,11 +318,11 @@ let bar = async function(){
 
 <ul>
   <li>首页</li>
-  
+
   <li>用户管理</li>
-  
+
   <li>购物车</li>
-  
+
 </ul>
 
 <script>

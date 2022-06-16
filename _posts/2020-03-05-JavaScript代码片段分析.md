@@ -1,12 +1,12 @@
 ---
 layout:     post
-title:      JS代码片段分析
+title:      JavaScript代码片段分析
 date:       2020-03-05
 author:     violetks
 header-img: img/post-bg-js-version.jpg
 catalog: true
 tags:
-    - JS
+    - JavaScript
 ---
 
 ### 1. setTimeout输出10个10
@@ -105,7 +105,7 @@ var i;
 for (i = 0; i < length; i++) {
   // does nothing
 }
-{ 
+{
   // a simple block
   numbers.push(i + 1);
 }
