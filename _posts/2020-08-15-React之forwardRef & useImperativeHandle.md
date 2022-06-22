@@ -20,6 +20,7 @@ const FancyButton = React.forwardRef((props, ref) => (
   <button ref={ref} className="FancyButton">
     {props.children}
   </button>
+
 ));
 
 // 调用子组件
@@ -39,7 +40,7 @@ useImperativeHandle(ref, createHandle, [deps])
 `useImperativeHandle` 可以让你在使用 `ref` 时自定义暴露给父组件的实例值。`useImperativeHandle` 应当与 `forwardRef` 一起使用：<br>
 
 ```javascript
-function FancyInput(props, ref) {
+function FancyInput (props, ref) {
   const inputRef = useRef();
   useImperativeHandle(ref, () => ({
     focus: () => {

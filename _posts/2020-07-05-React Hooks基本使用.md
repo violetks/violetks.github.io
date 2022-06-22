@@ -23,7 +23,7 @@ const [state, setState] = useState(initialState);
 ```html
 import React, { useState } from 'react';
 
-function Example() {
+function Example () {
   const [count, setCount] = useState(0);
 
   return (
@@ -105,7 +105,7 @@ const themes = {
 const ThemeContext = React.createContext(themes.light);
 
 // 二、Provider 提供了一个可以被子组件共享的对象
-function App() {
+function App () {
   return (
     <ThemeContext.Provider value={themes.dark}>
       <Toolbar />
@@ -114,7 +114,7 @@ function App() {
   );
 }
 
-function Toolbar(props) {
+function Toolbar (props) {
   return (
     <div>
       <ThemedButton />
@@ -124,7 +124,7 @@ function Toolbar(props) {
 }
 
 // 三、子组件中使用 useContext 获取 theme 属性
-function ThemedButton() {
+function ThemedButton () {
   const theme = useContext(ThemeContext);
   return (
     <button style={% raw %}{{ background: theme.background, color: theme.foreground }}{% endraw %}>
@@ -145,15 +145,15 @@ const [state, dispatch] = useReducer(reducer, initialArg, init);
 
 ```html
 // 计数器
-function reducer(state, action) {
+function reducer (state, action) {
   switch (action.type) {
-    case 'increment':return state + 1;
-    case 'decrement':return state - 1;
+    case 'increment': return state + 1;
+    case 'decrement': return state - 1;
     default:throw new Error();
   }
 }
 
-function Counter() {
+function Counter () {
   const [count, dispatch] = useReducer(reducer, 10);
   return (
     <>
@@ -178,7 +178,7 @@ const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 ### 六、useCallback
 
 ```javascript
-const fnA = useCallback(fnB,[a])
+const fnA = useCallback(fnB, [a])
 ```
 
 **`useCallback` 返回缓存的函数。**<br>
@@ -195,7 +195,7 @@ const refContainer = useRef(initialValue);
 #### 常见用例：命令式地访问子组件，useRef获取DOM元素
 
 ```html
-function Example() {
+function Example () {
   const inputEl = useRef(null);
   const onButtonClick = () => {
     // `current` 指向已挂载到 DOM 上的文本输入元素

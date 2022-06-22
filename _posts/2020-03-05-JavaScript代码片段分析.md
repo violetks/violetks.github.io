@@ -11,7 +11,7 @@ tags:
 
 ### 1. setTimeout输出10个10
 ```javascript
-for(var i = 0; i < 10; i++) {
+for (var i = 0; i < 10; i++) {
   setTimeout(function() {
     console.log(i);
   }, 1000);
@@ -21,9 +21,9 @@ for(var i = 0; i < 10; i++) {
 ##### 如何实现按序输出？
 **方法一：**闭包
 ```javascript
-for(var i = 0; i < 10; i++) {
-  (function(i){
-    setTimeout(function() {
+for (var i = 0; i < 10; i++) {
+  (function (i) {
+    setTimeout(function () {
       console.log(i);
     }, 1000);
   })(i);
@@ -31,24 +31,24 @@ for(var i = 0; i < 10; i++) {
 ```
 **方法二：**ES6的`let`声明变量
 ```javascript
-for(let i = 0; i < 10; i++) {
-  setTimeout(function() {
+for (let i = 0; i < 10; i++) {
+  setTimeout(function () {
     console.log(i);
   }, 1000);
 }
 ```
 **方法三：**使用`setTimeout`的第三个参数
 ```javascript
-for(var i = 0; i < 10; i++) {
-  setTimeout(function() {
+for (var i = 0; i < 10; i++) {
+  setTimeout(function () {
     console.log(i);
-  }, 1000,i);
+  }, 1000, i);
 }
 ```
 
 ### 2. 意外全局变量
 ```javascript
-function foo() {
+function foo () {
   let a = b = 0;
   a++;
   return a;
@@ -62,7 +62,7 @@ typeof b;  // => ???
 在 `foo()` 范围或全局范围中都没有声明变量 `b`。因此JavaScript将 `b = 0` 解释为 `window.b = 0`。<br>
 在浏览器中，以上代码片段等效于：<br>
 ```javascript
-function foo() {
+function foo () {
   let a;
   window.b = 0;
   a = window.b;
@@ -112,13 +112,13 @@ for (i = 0; i < length; i++) {
 
 numbers; // => [5]
 ```
-`for()` 将 `i` 变量递增到4，然后JavaScript一次进入块 `{number.push（i + 1）;}`，将 `4 +1` 推入数字数组。
+`for()` 将 `i` 变量递增到4，然后JavaScript一次进入块 `{numbers.push(i + 1);}`，将 `4 + 1` 推入数字数组。
 因此，`numbers` 数组的内容为 `[5]`。<br>
 
 ### 5. 自动分号插入
 ```
 // arrayFromValue() 返回什么值？
-function arrayFromValue(item) {
+function arrayFromValue (item) {
   return
     [item];
 }
@@ -143,7 +143,7 @@ var myVar = 'value';
 const myConst = 3.14;
 ```
 分析：在声明之前访问 `myVar` 的结果为 `undefined`。在初始化之前，提升的 `var` 变量具有 `undefined` 的值。<br>
-然儿，在声明行之前访问 `myConst` 会引发 `ReferenceError`。`const` 变量处于临时死区，直到声明行 `const myConst = 3.14`。<br>
+然而，在声明行之前访问 `myConst` 会引发 `ReferenceError`。`const` 变量处于临时死区，直到声明行 `const myConst = 3.14`。<br>
 
 ### 8. 下列表达式结果
 ```javascript
@@ -176,9 +176,9 @@ console.log('Value is ' + (val != '0') ? 'define' : 'undefine');  // => ???
 ### 11. 遍历数组arr，剔除数组中为0的元素，最终会被剔除掉几个0
 ```javascript
 var arr = [0,0,2,0,0,4,0,1,0,0,0,2];
-for(var i=0;i<arr.length;i++){
-  if(arr[i] == 0)
-  arr.splice( i ,1 );
+for (var i = 0; i < arr.length; i++) {
+  if (arr[i] == 0)
+  arr.splice(i, 1);
 }
 ```
 分析：`splice()`方法会改变原始数组。<br>
@@ -194,17 +194,19 @@ for(var i=0;i<arr.length;i++){
 ```javascript
 // 解决：删除所有0
 var arr = [0,0,2,0,0,4,0,1,0,0,0,2];
-for(var i=0;i<arr.length;i++){
-  if(arr[i] == 0)
-  arr.splice( i-- ,1 );
+for (var i = 0; i < arr.length; i++) {
+  if (arr[i] == 0)
+  arr.splice(i--, 1);
 }
 ```
 
 ### 12. 有函数F，以下call及apply方法写法错误的是
-A: F.apply( this , "" )<br>
-B: F.apply( undefined , [])<br>
-C: F.call( null , [])<br>
-D: F.call( null , null )<br>
+```
+A: F.apply(this, "")
+B: F.apply(undefined, [])
+C: F.call(null, [])
+D: F.call(null, null)
+```
 正确答案：A<br>
 分析：`apply()`方法需要以数组形式一次性传入所有调用函数。<br>
 `call()`方法必须详细列出每个参数，C选项中只传了一个参数，只不过是数组形式。<br>
@@ -226,7 +228,7 @@ num.toString(2)  // 二进制
 
 ### 14. ["1","2","3"].map(parseInt)
 （1）`map()`方法：按照原始数组元素顺序依次处理元素，返回一个新数组。<br>
-（2）`parseInt(string,radix)`<br>
+（2）`parseInt(string, radix)`<br>
 ```javascript
 string:必须，要被解析的字符串
 radix:可选，表示要解析的数字基数
@@ -237,15 +239,15 @@ radix:可选，表示要解析的数字基数
 - 如果 `string` 以 1 ~ 9 的数字开头，`parseInt()` 将把它解析为十进制的整数。
 
 ```javascript
-parseInt(1,0);//将十进制数1转化为十进制数，仍为1
-parseInt(2,1);//将一进制数2（不存在）转化为十进制数，NaN
-parseInt(3,2);//NaN
-parseInt(4,3);//NaN
-parseInt(10,4);//将四进制数10转化为十进制数为4
+parseInt(1, 0);//将十进制数1转化为十进制数，仍为1
+parseInt(2, 1);//将一进制数2（不存在）转化为十进制数，NaN
+parseInt(3, 2);//NaN
+parseInt(4, 3);//NaN
+parseInt(10, 4);//将四进制数10转化为十进制数为4
 ```
 `arr.map(parseInt)`含义为对数组`arr`的每一项调用`parseInt()`方法，传入的参数为每一项的值和该值的索引。<br>
 ```
-["1","2","3"].map(parseInt)  等价于
-[parseInt("1",0),parseInt("2",1),parseInt("3",2)]
+["1", "2", "3"].map(parseInt)  等价于
+[parseInt("1", 0), parseInt("2", 1), parseInt("3", 2)]
 ```
 结果为：`[1,NaN,NaN]`<br>

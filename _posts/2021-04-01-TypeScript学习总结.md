@@ -194,7 +194,7 @@ let output = identity<string>("myString");
 let output = identity("myString"); // 类型推论，根据入参自动确定
 ```
 ### 六、枚举
-1、数字枚举
+#### 1、数字枚举
 ```javascript
 enum Color {
   Red = 1,
@@ -208,16 +208,15 @@ enum Color {
   Blue = getSomeValue()
 }
 ```
-2、字符串枚举<br>
-3、异构枚举，不常用
+#### 2、字符串枚举<br>
+#### 3、异构枚举，不常用
 ```javascript
 enum BooleanLikeHeterogeneousEnum {
   No = 0,
   Yes = "YES",
 }
 ```
-4、反向映射<br>
-数字枚举成员具有反向映射，字符串枚举成员不会生成反向映射。
+#### 4、**反向映射：**数字枚举成员具有反向映射，字符串枚举成员不会生成反向映射。
 ```javascript
 enum Enum {
   A
