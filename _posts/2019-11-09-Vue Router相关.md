@@ -27,24 +27,24 @@ to里的值可以是一个字符串路径，或者一个描述地址的对象。
 ```html
 <!-- 首页 -->
 // path + query，地址栏变成  /about?id=1&name=xx
-<router-link :to="{path: '/about', query: {id:1,name:'xx'}}">跳转到about页面</router-link>
+<router-link :to="{path: '/about', query: {id:1, name:'xx'}}">跳转到about页面</router-link>
 // name + query，命名路由
-<router-link :to="{name: 'about', query: {id:1,name:'xx'}}">跳转到about页面</router-link>
+<router-link :to="{name: 'about', query: {id:1, name:'xx'}}">跳转到about页面</router-link>
 // path + params，这里提供了 path，params 会被忽略不生效
-<router-link :to="{path: '/about', params: {id:1,name:'xx'}}">跳转到about页面</router-link>
+<router-link :to="{path: '/about', params: {id:1, name:'xx'}}">跳转到about页面</router-link>
 // name + params，命名路由
-<router-link :to="{name: 'about', params: {id:1,name:'xx'}}">跳转到about页面</router-link>
+<router-link :to="{name: 'about', params: {id:1, name:'xx'}}">跳转到about页面</router-link>
 ```
 ```html
 <!-- about页面接收参数 -->
 <script>
 export default {
   name: "about",
-  created() {
+  created () {
     // 以query方式接收参数：通过URL传递，类似get方式
     console.log(this.$route.query.id);
     console.log(this.$route.query.name);
-	
+
     // 以params方式接收参数：类似post方式
     console.log(this.$route.params.id);
     console.log(this.$route.params.name);
@@ -63,10 +63,10 @@ export default {
 export default {
   name: "index",
   methods: {
-    open() {
+    open () {
       this.$router.push('/about');           // 字符串
-      this.$router.push({path:'/about'});    // 对象
-      this.$router.push({name:'about'});     // 命名路由
+      this.$router.push({path: '/about'});   // 对象
+      this.$router.push({name: 'about'});    // 命名路由
     }
   }
 }
@@ -85,18 +85,18 @@ export default {
   name: "index",
   methods: {
     // query方式
-    open1() {
+    open1 () {
       this.$router.push({
-        path:'/about',
-        query: {id: 1,name: "xx"}
+        path: '/about',
+        query: {id: 1, name: "xx"}
       });
     },
-	
+
     // params方式
-    open2() {
+    open2 () {
       this.$router.push({
-        name:'about',     // 这里只能用name
-        params: {id: 1,name: "xx"}
+        name: 'about',     // 这里只能用name
+        params: {id: 1, name: "xx"}
       });
     }
   }
@@ -108,11 +108,11 @@ export default {
 <script>
 export default {
   name: "about",
-  created() {
+  created () {
     // 以query方式接收参数：通过URL传递，类似get方式
     console.log(this.$route.query.id);
     console.log(this.$route.query.name);
-	
+
     // 以params方式接收参数：类似post方式
     console.log(this.$route.params.id);
     console.log(this.$route.params.name);
@@ -123,8 +123,8 @@ export default {
 
 ### 三、Vue2.0中$router和$route的区别
 1. `$router`是VueRouter的实例，是一个**全局对象**，包含了所有路由关键的对象和属性。<br>
-`this.$router.push({path:'home'});`本质是向history栈中添加一个记录，点击后退会返回到上一个页面。<br>
-`this.$router.replace({path:'home'});` 替换路由，没有历史记录，一般使用replace来做404页面 `this.$router.replace('/')`。<br>
+`this.$router.push({path: 'home'});`本质是向history栈中添加一个记录，点击后退会返回到上一个页面。<br>
+`this.$router.replace({path: 'home'});` 替换路由，没有历史记录，一般使用replace来做404页面 `this.$router.replace('/')`。<br>
 `this.$router.go(-1)`，后退。<br>
 2. `$route`是一个跳转到的对象，每一个路由都会有一个route对象，是一个**局部对象**，可以获取对应的`name`,`path`,`params`,`query`等。<br>
 
@@ -134,7 +134,7 @@ export default {
 {
   path: "/home",
   name: "home",
-  meta: { isAuth:true },
+  meta: { isAuth: true },
   component: () => import('@/pages/homes/home/index.vue')
 }
 ```
@@ -152,5 +152,5 @@ export default {
 // 在当前页面打开
 window.location.href = "https://www.baidu.com/s?wd=vue";
 // 打开一个新的浏览器窗口
-window.open("https://www.baidu.com/s?wd=vue","_blank","width=1000,height=500",true);
+window.open("https://www.baidu.com/s?wd=vue", "_blank", "width=1000, height=500", true);
 ```
