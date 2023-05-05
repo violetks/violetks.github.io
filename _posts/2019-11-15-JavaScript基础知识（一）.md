@@ -7,7 +7,6 @@ header-img: img/post-bg-js-version.jpg
 catalog: true
 tags:
     - JavaScript
-    - 基础知识
 ---
 
 ### 1. 与Java的区别

@@ -7,7 +7,6 @@ header-img: img/post-bg-js-version.jpg
 catalog: true
 tags:
     - JavaScript
-    - 基础知识
 ---
 
 ### 1. 给DOM元素绑定事件有哪几种方法？
