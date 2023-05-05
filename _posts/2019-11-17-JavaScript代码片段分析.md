@@ -9,7 +9,7 @@ tags:
     - JavaScript
 ---
 
-### 1. setTimeout输出10个10
+### 一、setTimeout输出10个10
 ```javascript
 for (var i = 0; i < 10; i++) {
   setTimeout(function() {
@@ -18,7 +18,7 @@ for (var i = 0; i < 10; i++) {
 }
 ```
 分析：涉及到JavaScript的执行机制，JavaScript是一个单线程的解释器，`setTimeout`是异步执行函数，本质是间隔一定时间将任务添加到任务队列（`Event Queue`）中。`for`循环作为主线程先执行完毕，按序执行10次输出 `i`，就会输出10个10。<br>
-##### 如何实现按序输出？
+#### 如何实现按序输出？
 **方法一：**闭包
 ```javascript
 for (var i = 0; i < 10; i++) {
@@ -46,7 +46,7 @@ for (var i = 0; i < 10; i++) {
 }
 ```
 
-### 2. 意外全局变量
+### 二、意外全局变量
 ```javascript
 function foo () {
   let a = b = 0;
@@ -77,7 +77,7 @@ typeof b;  // => 'number'
 `typeof a` 等于 `'undefined'`，变量 `a` 存在于 `foo()` 范围内，而在外部范围内不使用。<br>
 `b` 是一个值为 0 的全局变量。
 
-### 3. 数组的length属性
+### 三、数组的length属性
 ```javascript
 const clothes = ['jacket','t-shirt'];
 clothes.length = 0;
@@ -86,7 +86,7 @@ clothes[0];  // => ???
 ```
 分析：**减少length属性的值的结果是删除自己的数组元素。**因此，`clothes[0]`等于`undefined`，因为 `clothes` 数组已被清空。<br>
 
-### 4. 鹰眼测试
+### 四、鹰眼测试
 ```javascript
 // numbers 数组的内容是什么？
 const length  = 4;
@@ -115,7 +115,7 @@ numbers; // => [5]
 `for()` 将 `i` 变量递增到4，然后JavaScript一次进入块 `{numbers.push(i + 1);}`，将 `4 + 1` 推入数字数组。
 因此，`numbers` 数组的内容为 `[5]`。<br>
 
-### 5. 自动分号插入
+### 五、自动分号插入
 ```
 // arrayFromValue() 返回什么值？
 function arrayFromValue (item) {
@@ -128,13 +128,13 @@ arrayFromValue(10); // => ???
 分析：很容易错过 `return` 关键字和 `[item]` 表达式之间的换行符。此换行符使JavaScript自动在 `return` 和 `[item]` 表达式之间插入分号。
 `return;` 函数内部使其返回 `undefined`。因此 `arrayFromValue(10)` 的值为 `undefined`。<br>
 
-### 6. 浮点数计算
+### 六、浮点数计算
 ```javascript
 0.1 + 0.2 === 0.3 // => ???
 ```
 分析：浮点数计算会产生误差，并不等于 `0.3`，结果是 `false`。<br>
 
-### 7. 变量提升
+### 七、变量提升
 ```javascript
 myVar;   // => ???
 myConst; // => ???
@@ -145,7 +145,7 @@ const myConst = 3.14;
 分析：在声明之前访问 `myVar` 的结果为 `undefined`。在初始化之前，提升的 `var` 变量具有 `undefined` 的值。<br>
 然而，在声明行之前访问 `myConst` 会引发 `ReferenceError`。`const` 变量处于临时死区，直到声明行 `const myConst = 3.14`。<br>
 
-### 8. 下列表达式结果
+### 八、下列表达式结果
 ```javascript
 ""==0      // true，0和空字符串都是false，值相等
 {}==={}    // false，引用数据类型，是两个独立的对象
@@ -155,7 +155,7 @@ const myConst = 3.14;
 1+'1'      // 11
 ```
 
-### 9. 逻辑运算符
+### 九、逻辑运算符
 ```javascript
 var a=1,b=true,c=2,d=3;
 a = b && d && c;
@@ -166,14 +166,14 @@ console.log(a);    // 2
 `a || b`：如果a是true，那么b不管是true还是false，都返回true。因此不用判断b了，这个时候刚好判断到a，因此返回a。<br>
 　　    　如果a是false，那么就要判断b，如果b是true，那么返回true，如果b是false，返回false，其实不就是返回b了吗。<br>
 
-### 10. 运算符优先级
+### 十、运算符优先级
 ```javascript
 // 假设val已经声明，可定义为任何值
 console.log('Value is ' + (val != '0') ? 'define' : 'undefine');  // => ???
 ```
 分析：加号优先级高于三目运算，低于括号。所以括号中无论真假，加上前边的字符串都为true，三目运算为true是输出 `define`。<br>
 
-### 11. 遍历数组arr，剔除数组中为0的元素，最终会被剔除掉几个0
+### 十一、遍历数组arr，剔除数组中为0的元素，最终会被剔除掉几个0
 ```javascript
 var arr = [0,0,2,0,0,4,0,1,0,0,0,2];
 for (var i = 0; i < arr.length; i++) {
@@ -200,7 +200,7 @@ for (var i = 0; i < arr.length; i++) {
 }
 ```
 
-### 12. 有函数F，以下call及apply方法写法错误的是
+### 十二、有函数F，以下call及apply方法写法错误的是
 ```
 A: F.apply(this, "")
 B: F.apply(undefined, [])
@@ -211,7 +211,7 @@ D: F.call(null, null)
 分析：`apply()`方法需要以数组形式一次性传入所有调用函数。<br>
 `call()`方法必须详细列出每个参数，C选项中只传了一个参数，只不过是数组形式。<br>
 
-### 13. toString()
+### 十三、toString()
 ```javascript
 3.toString()     // => ???
 3..toString()    // => ???
@@ -226,7 +226,7 @@ num.toString(2)  // 二进制
 （1）`null`和`undefined`转换需要用`String()`<br>
 （2）对于`Number`和`Boolean`，`String()`和`toString()`相同<br>
 
-### 14. ["1","2","3"].map(parseInt)
+### 十四、["1","2","3"].map(parseInt)
 （1）`map()`方法：按照原始数组元素顺序依次处理元素，返回一个新数组。<br>
 （2）`parseInt(string, radix)`<br>
 ```javascript

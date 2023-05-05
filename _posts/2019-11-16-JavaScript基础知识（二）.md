@@ -9,7 +9,7 @@ tags:
     - JavaScript
 ---
 
-### 1. 给DOM元素绑定事件有哪几种方法？
+### 一、给DOM元素绑定事件有哪几种方法？
 （1）使用内联，优先级最高，一个元素只能添加一个事件；<br>
 ```javascript
 <input type="button" value="btn" onclick="alert('内联！');">
@@ -38,17 +38,17 @@ tags:
 </script>
 ```
 
-### 2. 闭包是什么？有什么优点和缺点？
+### 二、闭包是什么？有什么优点和缺点？
 解答：闭包是指**有权访问另一个函数作用域中的局部变量的函数**。当其中一个内部函数在外部函数以外被调用时，就会形成闭包。<br>
 **优点：**① 能够读取函数内部的局部变量；②闭包就是函数的局部变量集合，让这些变量<font color="red">一直存在于内存中</font>，不会在调用结束后被垃圾回收机制回收；③不增加额外的全局变量。<br>
 **缺点：**由于闭包会使函数中的变量存在于内存中，<font color="red">内存消耗很大，所以不能滥用闭包</font>；解决的办法是退出函数之前，将不使用的局部变量删除。<br>
 
-### 3. this的指向问题？
+### 三、this的指向问题？
 （1）普通函数执行，内部this指向全局对象window。<br>
 （2）函数在定义的时候this是不确定的，只有在调用的时候可以确定。<br>
 （3）如果函数作为一个对象的方法被该对象调用，那么函数内的this则指向该对象。<br>
 （4）构造函数中的this是一个隐式对象，类似一个初始化的类型，所有方法和属性都挂载到了这个隐式对象身上，后续通过new关键字来调用，从而实现实例化。<br>
-##### 改变this指向的方法：
+#### 改变this指向的方法：
 - 使用箭头函数<br>
 - 在函数内部使用`_this=this;`<br>
 - 使用call、apply、bind<br>
@@ -66,14 +66,14 @@ var obj = new f();
 // 输出22
 ```
 
-### 4. 什么是window对象？什么是document对象？
+### 四、什么是window对象？什么是document对象？
 **window对象**是指浏览器打开的窗口。<br>
 **document对象**是文档对象，window对象的一个属性。
 
-### 5. document.write和innerHTML的区别？
+### 五、document.write和innerHTML的区别？
 `document.write`直接将内容写入页面的内容流，会导致重绘整个页面。<br>
 `innerHTML`将内容写入某个DOM节点，可以重绘页面的一部分<br>
-##### innerHTML、innerText、outerHTML、outerText
+#### innerHTML、innerText、outerHTML、outerText
 - `innerHTML`：设置或获取标签所包含的HTML与文本信息。（不含标签本身）
 - `innerText`：设置或获取标签所包含的文本信息。（不含标签本身）
 - `outerHTML`：设置或获取标签本身以及所包含的HTML与文本信息。（包含标签本身）
@@ -82,6 +82,7 @@ var obj = new f();
 ```javascript
 <div id="div1">
   qwe<p>content</p>
+
 </div>
 
 <script>
@@ -93,7 +94,7 @@ var obj = new f();
 </script>
 ```
 
-### 6. JS获取HTML元素的8种方法
+### 六、JS获取HTML元素的8种方法
 - 通过ID获取（getElementById）
 - 通过name属性（getElemsentsByName）
 - 通过标签名（getElementsByTagName）
@@ -103,7 +104,7 @@ var obj = new f();
 - 获取HTML标签（document.documentElement）
 - 获取body元素（document.body）
 
-### 7. JS操作DOM的方法
+### 七、JS操作DOM的方法
 （1）创建节点<br>
 ```css
 createElement("标签名")    //创建一个具体的元素
@@ -132,10 +133,10 @@ node.cloneNode(true); //既复制节点本身，也复制其所有的子节点
 方式2：`node.setAttribute(属性名，新的属性值)`<br>
 （8）删除节点属性：`node.removeAttribute(属性名)`
 
-##### DOM中的三种节点类型
+#### DOM中的三种节点类型
 元素节点、文本节点、属性节点
 
-##### DOM元素常用属性
+#### DOM元素常用属性
 - ele.parentNode：返回当前元素的父节点
 - ele.children：返回当前元素的所有子节点，只返回HTML节点
 - ele.childNodes：返回当前元素的所有子节点，包括文本、HTML、属性节点。（回车也会当做一个节点）
@@ -146,7 +147,7 @@ node.cloneNode(true); //既复制节点本身，也复制其所有的子节点
 - ele.nextElementSibling：返回当前元素之后的下一个兄弟元素（不包括文本节点、注释节点）
 - ele.previousElementSibling：返回当前元素之前的上一个兄弟元素（不包括文本节点、注释节点）
 
-### 8. JS中开头"use strict"是什么意思？
+### 八、JS中开头"use strict"是什么意思？
 `"use strict"`是一种ECMAscript 5 添加的严格运行模式，这种模式使得 Javascript 在更严格的条件下运行。<br>
 **严格模式的限制：**<br>
 （1）不允许使用未声明的变量（对象也是一个变量）；<br>
@@ -180,18 +181,18 @@ alert(x);       //报错
 **为什么使用严格模式：**<br>
 消除JavaScript语法的一些不合理、不严谨之处，减少一些怪异行为；消除代码运行的一些不安全之处，**保证代码运行的安全**；提高编译器效率，增加运行速度；另一方面，同样的代码，在**严格模式**中，可能会有不一样的运行结果；一些在“正常模式”下可以运行的语句，在“严格模式”下将不能运行。<br>
 
-### 9. JS中eval的功能？
-把对应的字符串解析成JS代码并运行；和Python有点像啊，用到的又不多😂
+### 九、JS中eval的功能？
+把对应的字符串解析成JS代码并运行。
 
-### 10. window.onload和$(document).ready()的区别
+### 十、window.onload和$(document).ready()的区别
 - `window.onload=function(){}`方法是在网页中所有的元素（包括元素的所有关联文件）完全加载到浏览器后才执行的。一个页面中不能同时编写多个。
 - `$(document).ready()`可以在DOM载入就绪时就对其进行操纵，并调用执行绑定的函数。同一页面能同时编写多个，简写为`$(function(){})`。
 
-### 11. JSON与JS对象的转换
+### 十一、JSON与JS对象的转换
 - `JSON.parse()`: JSON字符串转换为JS对象
 - `JSON.stringify()`: JS对象转换成JSON字符串
 
-### 12. [JS的执行机制](https://www.cnblogs.com/intangible/p/8066979.html)
+### 十二、[JS的执行机制](https://www.cnblogs.com/intangible/p/8066979.html)
 （1）JavaScript是一门**单线程**语言，是按照语句出现的顺序执行。<br>
 （2）JavaScript事件循环<br>
 分为：**同步任务**、**异步任务**<br>
@@ -220,7 +221,7 @@ console.log('console');
 // 输出：promise console setTimeout
 ```
 
-### 13. [深拷贝与浅拷贝](https://www.cnblogs.com/echolun/p/7889848.html)
+### 十三、[深拷贝与浅拷贝](https://www.cnblogs.com/echolun/p/7889848.html)
 如何区分深拷贝与浅拷贝，简单点来说，就是假设B复制了A，当修改A时，看B是否会发生变化，如果B也跟着变了，说明这是浅拷贝，如果B没变，那就是深拷贝。<br>
 涉及到基本数据类型和引用数据类型的数据存储方式：栈和堆。<br>
 **实现深拷贝：**<br>
@@ -229,7 +230,7 @@ console.log('console');
 （3）借用JQuery的`extend`方法。<br>
 （4）借用Lodash（JavaScript工具库）中的`_.cloneDeep`。<br>
 
-### 14. JS异步处理的几种方式
+### 十四、JS异步处理的几种方式
 **（1）回调函数（callback）**<br>
 **概念**：回调是函数A被作为一个参数传递到函数B里，在函数B执行完后再执行。<br>
 **优点**：回调函数是异步编程最基本的方法，简单、容易理解和部署。<br>
@@ -294,8 +295,8 @@ f1().then(f2).fail(f3);
 **优点**：回调函数写成了**链式写法**，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现很多强大的功能。**如果一个任务已经完成，再添加回调函数，该回调函数会立即执行**。<br>
 **缺点**：编写和理解都相对比较难。<br>
 **（5）async/await**<br>
-函数前面多加 `async` 关键字，函数返回的是一个 **Promise** 对象，所接收的值就是函数 **return** 的值。<br>
-在 `async` 函数内部使用 `await` 命令，表示等待一个异步函数的返回。`await` 后面跟着的是一个 **Promise** 对象，如果不是的话，系统会调用 `Promise.resolve()` 方法，将其转为一个 `resolve` 的 **Promise** 对象。<br>
+函数前面多加`async`关键字，函数返回的是一个 **Promise** 对象，所接收的值就是函数 **return** 的值。<br>
+在`async`函数内部使用`await`命令，表示等待一个异步函数的返回。`await`后面跟着的是一个 **Promise** 对象，如果不是的话，系统会调用`Promise.resolve()`方法，将其转为一个`resolve`的 **Promise** 对象。<br>
 ```javascript
 let bar = async function(){
     try{
@@ -306,7 +307,7 @@ let bar = async function(){
 }
 ```
 
-### 15. JS设置CSS样式的几种方式
+### 十五、JS设置CSS样式的几种方式
 **（1）设置style属性：**元素.style.样式属性="样式值"<br>
 **（2）className属性：**把动态调整后的样式先写在CSS样式表里<br>
 ```javascript
@@ -351,11 +352,11 @@ element.style.cssText = 'height: 100px !important';
 element.style.cssText += 'height: 100px !important';
 ```
 
-### 16. new Date()获取的时间是什么时间
+### 十六、new Date()获取的时间是什么时间
 **运行环境的时间**：如果是**浏览器**那就是电脑时间或者手机时间；如果是**node.js**那就是服务器时间<br>
 前台获取的时间都用处不大、用户可以改、不安全；通常时间用于从后端传入、服务器的时间一定是统一的、解析时间戳；<br>
 js中单独调用new Date()，例如document.write(new Date())；显示的结果是：Mar 31 10:10:43 UTC+0800 2012 这种格式的时间； 但是用new Date() 参与计算会自动转换为从1970.1.1开始的毫秒数。<br>
-##### JS获取当前时间戳
+#### JS获取当前时间戳
 ```javascript
 // 方法1
 var timestamp =Date.parse(new Date());
