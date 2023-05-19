@@ -99,8 +99,8 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "掘金",
-        href: "https://juejin.im/"
+        title: "稀土掘金",
+        href: "https://juejin.cn/"
     },{
         title: "简书",
         href: "https://www.jianshu.com/"

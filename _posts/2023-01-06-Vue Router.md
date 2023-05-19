@@ -2,7 +2,7 @@
 layout:     post
 title:      Vue Router
 subtitle:   Vue路由配置&页面跳转&参数传递
-date:       2023-01-04
+date:       2023-01-06
 author:     violetks
 header-img: img/home-bg-o.jpg
 catalog: true
@@ -10,7 +10,8 @@ tags:
     - Vue2
 ---
 
-> 路由重新渲染了视图，不是真正的页面跳转
+> 路由重新渲染了视图，不是真正的页面跳转。<br>
+**注意**：与Vue 2 匹配的是[Vue Router 3.x](https://v3.router.vuejs.org)，与Vue 3 匹配的是[Vue Router 4.x](https://router.vuejs.org/)。<br>
 
 ### 一、单页应用（SPA）与多页应用（MPA）的区别
 **1、多页应用**<br>
@@ -38,23 +39,22 @@ tags:
 to里的值可以是一个字符串路径，或者一个描述地址的对象。<br>
 **1.不带参数跳转**
 ```html
-// 字符串
+<!-- 字符串 -->
 <router-link to="/about"><button>跳转到about页面</button></router-link>
-// 对象
+<!-- 对象 -->
 <router-link :to="{path: '/about'}">跳转到about页面</router-link>
-// 命名路由
+<!-- 命名路由 -->
 <router-link :to="{name: 'about'}">跳转到about页面</router-link>
 ```
 **2.带参数跳转**
 ```html
-<!-- 首页 -->
-// path + query，地址栏变成  /about?id=1&name=xx
+<!-- path + query，地址栏变成  /about?id=1&name=xx -->
 <router-link :to="{path: '/about', query: {id:1, name:'xx'}}">跳转到about页面</router-link>
-// name + query，命名路由
+<!-- name + query，命名路由 -->
 <router-link :to="{name: 'about', query: {id:1, name:'xx'}}">跳转到about页面</router-link>
-// path + params，这里提供了 path，params 会被忽略不生效
+<!-- path + params，这里提供了 path，params 会被忽略不生效 -->
 <router-link :to="{path: '/about', params: {id:1, name:'xx'}}">跳转到about页面</router-link>
-// name + params，命名路由
+<!-- name + params，命名路由 -->
 <router-link :to="{name: 'about', params: {id:1, name:'xx'}}">跳转到about页面</router-link>
 ```
 ```html
@@ -144,7 +144,7 @@ export default {
 </script>
 ```
 
-### 五、Vue2.0中$router和$route的区别
+### 五、Vue 2中$router和$route的区别
 1. `$router`是一个VueRouter的实例，是一个**全局对象**，包含了所有路由关键的对象和属性，可以导航到不同的路由里。<br>
 `this.$router.push({path: 'home'});`本质是向history栈中添加一个记录，点击后退会返回到上一个页面。<br>
 `this.$router.replace({path: 'home'});` 替换路由，没有历史记录，一般使用replace来做404页面 `this.$router.replace('/')`。<br>
@@ -168,7 +168,13 @@ export default {
 第三步：在router下的index.js中引入页面，配置路由<br>
 第四步：App.vue中添加`<router-view></router-view>`路由出口<br>
 
-### 八、真正的页面跳转
+### 八、几个注意点
+1、路由组件通常存放在`pages`文件夹，一般组件通常存放在`components`文件夹；<br>
+2、通过切换，“隐藏”了的路由组件，默认是被销毁掉的，需要的时候再去挂载；<br>
+3、每个组件都有自己的`$route`属性，里面存储着自己的路由信息；<br>
+4、整个应用只有一个router，可以通过组件的`$router`属性获取到；<br>
+
+### 九、真正的页面跳转
 ```javascript
 <a target="_blank" href="url">超链接</a>
 
@@ -176,4 +182,47 @@ export default {
 window.location.href = "https://www.baidu.com/s?wd=vue";
 // 打开一个新的浏览器窗口
 window.open("https://www.baidu.com/s?wd=vue", "_blank", "width=1000, height=500", true);
+```
+
+### 十、创建路由实例
+```javascript
+// 创建并暴露一个路由实例
+export default new VueRouter({
+  routes: [
+    {
+      path: "/about",
+      component: About
+    },
+    {
+      // 动态路径参数，以冒号开头，像 /user/foo 和 /user/bar 都将映射到相同的路由。在 User 组件可以用 this.$route.params.id 接收
+      path: "/user/:id",
+      component: User
+    },
+    {
+      path: "/home",
+      component: Home,
+      children: [ // 配置嵌套子路由
+        {
+          path: "news",
+          component: News
+        },
+        {
+          name: "message",
+          path: "message/:id/:title",
+          component: Message,
+          // props的第一种写法，值为对象，该对象中的所有key-value都会以props的形式传给Message组件
+          props: { a: 1, b: "hello" },
+
+          // props的第二种写法，值为布尔值，为真时会把该路由组件收到的所有params参数，以props的形式传给Message组件
+          props: true,
+
+          // props的第三种写法，值为函数
+          props($route){
+            return { id: $route.query.id, title: $route.query.title }
+          }
+        }
+      ]
+    }
+  ]
+})
 ```
