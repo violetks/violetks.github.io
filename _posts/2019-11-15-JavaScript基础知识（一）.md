@@ -102,3 +102,20 @@ console.error();
 let str = name ?? '';
 ```
 如果 `name` 存在， `str = name`，不存在则 `str = ''`。
+
+### 十三、JavaScript构造函数和普通函数的区别
+1、构造函数也是一个普通函数，创建方式和普通函数一样，但构造函数习惯上首字母大写；<br>
+2、构造函数和普通函数的区别在于：调用方式不一样。作用也不一样，构造函数用来新建实例对象；<br>
+3、调用方式：普通函数的调用方式直接用`person()`，构造函数的调用方式需要使用`new`关键字来调用`new Person()`；<br>
+4、构造函数的函数名与类名相同，`Person()`这个构造函数，`Person`既是函数名，也是这个对象的类名；<br>
+5、构造函数内部用`this`来构造属性和方法；<br>
+```javascript
+function Person(name, job, age) {
+  this.name = name;
+  this.job = job;
+  this.age = age;
+  this.sayHi = function() {
+    console.log("Hi")
+  }
+}
+```
