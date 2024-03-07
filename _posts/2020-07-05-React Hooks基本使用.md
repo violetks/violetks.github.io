@@ -214,5 +214,4 @@ function Example () {
 
 **自定义 Hook 是一个函数，其名称以 “use” 开头，函数内部可以调用其他的 Hook。**<br>
 
-![aGhxUA.png](https://s1.ax1x.com/2020/08/01/aGhxUA.png)
-<!-- ![aGhxUA.png](/instructPic/aGhxUA.png) -->
+![aGhxUA.png](/instructPic/aGhxUA.png)

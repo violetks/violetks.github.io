@@ -128,8 +128,7 @@ const clearForm = () => {
 
 ### 四、`Form.Item`内有多个元素，控制台报错。
 
-![di4XQI.png](https://s1.ax1x.com/2020/08/15/di4XQI.png)
-<!-- ![di4XQI.png](/instructPic/di4XQI.png) -->
+![di4XQI.png](/instructPic/di4XQI.png)
 
 `<Form.Item name="field" />` 只会对它的直接子元素绑定表单功能，例如直接包裹了 Input/Select。如果控件前后还有一些文案或样式装点，或者一个表单项内有多个控件，你可以使用内嵌的 `Form.Item` 完成。你可以给 `Form.Item` 自定义 `style` 进行内联布局，或者添加 `noStyle` 作为纯粹的无样式绑定组件（类似 3.x 中的 `getFieldDecorator`）。<br>
 
@@ -154,8 +153,7 @@ const clearForm = () => {
 
 一开始我使用上面的方法给 `InputNumber` 设置了初始值，但没有生效，控制台还报错。<br>
 
-![di4jyt.png](https://s1.ax1x.com/2020/08/15/di4jyt.png)
-<!-- ![di4jyt.png](/instructPic/di4jyt.png) -->
+![di4jyt.png](/instructPic/di4jyt.png)
 
 官网里有提到这个问题：当你为 `Form.Item` 设置 `name` 属性后，子组件会转为受控模式。因而 `defaultValue` 不会生效。你需要在 `Form` 上通过 `initialValues` 设置默认值。<br>
 
@@ -171,8 +169,7 @@ const clearForm = () => {
 
 为 `true` 时不带样式。可编辑表格中的 `Form.Item` 设置 `noStyle` 之后，校验时不会出现下图中的效果。<br>
 
-![09Gn3R.png](https://s1.ax1x.com/2020/09/25/09Gn3R.png)
-<!-- ![09Gn3R.png](/instructPic/09Gn3R.png) -->
+![09Gn3R.png](/instructPic/09Gn3R.png)
 
 ### 七、 编辑页`Select` 下拉框回显id问题
 
@@ -183,13 +180,11 @@ const clearForm = () => {
 
 新增页：<br>
 
-![wcoens.png](https://s1.ax1x.com/2020/09/16/wcoens.png)
-<!-- ![wcoens.png](/instructPic/wcoens.png) -->
+![wcoens.png](/instructPic/wcoens.png)
 
 编辑页：<br>
 
-![wcomBn.png](https://s1.ax1x.com/2020/09/16/wcomBn.png)
-<!-- ![wcomBn.png](/instructPic/wcomBn.png) -->
+![wcomBn.png](/instructPic/wcomBn.png)
 
 **解决：**将下拉框中的 `onChange` 事件在 `useEffect` 中调用，主要代码如下。<br>
 
