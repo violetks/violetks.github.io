@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      JavaScript基础知识（一）
-date:       2019-11-16
+date:       2019-11-24
 author:     violetks
 header-img: img/post-bg-js-version.jpg
 catalog: true
