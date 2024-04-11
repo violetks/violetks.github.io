@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      JavaScript代码片段分析
-date:       2019-11-26
+date:       2019-12-11
 author:     violetks
 header-img: img/post-bg-js-version.jpg
 catalog: true
@@ -233,7 +233,7 @@ num.toString(2)  // 二进制
 string:必须，要被解析的字符串
 radix:可选，表示要解析的数字基数
 ```
-当忽略参数 `radix` , 默认数字的基数如下:<br>
+当忽略参数 `radix`，默认数字的基数如下：<br>
 - 如果 `string` 以 "0x" 开头，`parseInt()` 会把 string 的其余部分解析为十六进制的整数。
 - 如果 `string` 以 0 开头，那么 ECMAScript v3 允许 `parseInt()` 的一个实现把其后的字符解析为八进制或十六进制的数字。
 - 如果 `string` 以 1 ~ 9 的数字开头，`parseInt()` 将把它解析为十进制的整数。

@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      JavaScript数组方法
-date:       2019-11-27
+date:       2019-12-12
 author:     violetks
 header-img: img/post-bg-js-version.jpg
 catalog: true
@@ -46,7 +46,7 @@ tags:
 ![every.png](/instructPic/every.png)
 
 **9、some()：**用于检测数组中的元素是否满足指定条件（函数提供）。`some()`方法会依次执行数组的每个元素：<br>
-（1）如果有一个元素满足条件，则表达式返回 true , 剩余的元素不会再执行检测。<br>
+（1）如果有一个元素满足条件，则表达式返回 true，剩余的元素不会再执行检测。<br>
 （2）如果没有满足条件的元素，则返回 false。<br>
 `some()`不会对空数组进行检测，不会改变原始数组。参数：currentValue 当前元素的值、index 当前元素的索引值、arr 当前元素属于的数组对象。<br>
 
@@ -99,14 +99,14 @@ tags:
 ![reverse.png](/instructPic/reverse.png)
 
 **20、find()：**返回通过测试（函数内判断）的数组的第一个元素的值。`find()`方法为数组中的每个元素都调用一次函数执行：<br>
-（1）当数组中的元素在测试条件时返回 true 时, `find()`返回符合条件的元素，之后的值不会再调用执行函数。<br>
+（1）当数组中的元素在测试条件时返回 true 时，`find()`返回符合条件的元素，之后的值不会再调用执行函数。<br>
 （2）如果没有符合条件的元素返回 undefined。<br>
 `find()`对于空数组，函数是不会执行的，不改变数组的原始值。<br>
 
 ![find.png](/instructPic/find.png)
 
 **21、findIndex()：**返回传入一个测试条件（函数）符合条件的数组第一个元素位置。`findIndex()`方法为数组中的每个元素都调用一次函数执行：<br>
-（1）当数组中的元素在测试条件时返回 true 时, `findIndex()`返回符合条件的元素的索引位置，之后的值不会再调用执行函数。<br>
+（1）当数组中的元素在测试条件时返回 true 时，`findIndex()`返回符合条件的元素的索引位置，之后的值不会再调用执行函数。<br>
 （2）如果没有符合条件的元素返回 -1。<br>
 `findIndex()`对于空数组，函数是不会执行的，不改变数组的原始值。<br>
 

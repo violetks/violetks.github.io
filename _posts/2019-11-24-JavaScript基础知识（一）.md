@@ -83,14 +83,27 @@ console.error();
 对于Array、Null等特殊对象都是是返回object，会判断错误。<br>
 解决方法：`(bar !== null) && (typeof bar === “object”) && (! $.isArray(bar))`
 
+```javascript
+console.log(true + 1);         //2
+console.log('name' + true);  	 //nametrue
+console.log(undefined + 1); 	 //NaN
+console.log(typeof undefined); //undefined
+console.log(typeof(NaN));      //number
+console.log(typeof(null));     //object
+```
+
 ### 八、==和===的区别
 （1）==：如果两个值类型不同也有可能相等，null和undefined使用==判断是相等的。<br>
 （2）===：严格相等，类型不同不相等，null和undefined不相等。<br>
 （3）==会自动转换类型，===不会。<br>
 
 ### 九、null和undefined的区别
-- null：Null类型，代表 “空值”，代表一个空对象指针，使用typeof运算得到 “object” ，所以可以认为它是一个特殊的对象值。
-- undefined：Undefined类型，当一个声明了一个变量未初始化时，得到的就是 undefined。
+1、undefined：Undefined类型，字面意思是未定义的值，**表示一个变量最原始的状态，而非人为操作的结果。**这种原始状态会在以下 4 种场景中出现：<br>
+（1）声明了一个变量但未初始化。<br>
+（2）访问对象上不存在的属性。<br>
+（3）函数定义了形参，但没有传递实参。<br>
+（4）使用 void 对表达式求值。<br>
+2、null：Null类型，代表 “空值”，**表示一个对象被人为的设置为空对象，而非一个变量最原始的状态。**代表一个空对象指针，使用typeof运算得到 “object” ，是因为JavaScript数据类型在底层都是以二进制的形式表示的，**二进制的前三位为 0 会被 typeof 判断为对象类型**，而 null 的二进制位恰好都是 0 ，因此 null 被误判断为 Object 类型。<br>
 
 ### 十、NaN是Number类型，验证它的函数：isNaN()
 
