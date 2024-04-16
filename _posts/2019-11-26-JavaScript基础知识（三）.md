@@ -150,3 +150,101 @@ let arrLike = {
 };
 console.log(Array.prototype.slice.call(arrLike)); //[0, 1, empty × 2]
 ```
+
+### 二、判断变量是不是数组，有哪些方法
+**1、Array.isArray()**<br>
+**（1）准确性：**可以准确判断一个变量是否是数组，不会将其他引用类型误判为数组。<br>
+**（2）跨窗口和跨框架支持：**可以在不同的窗口（window）和框架（iframe）中正常工作，不受上下文环境的限制。<br>
+```javascript
+let arr = [1, 2, 3];
+console.log(Array.isArray(arr)); // true
+
+let obj = { name: "John", age: 25 };
+console.log(Array.isArray(obj)); // false
+
+let str = "Hello";
+console.log(Array.isArray(str)); // false
+```
+
+**2、instanceof**<br>
+判断逻辑是检查原型链上是否存在构造函数的原型。<br>
+```javascript
+let arr = [1, 2, 3];
+console.log(arr instanceof Array); // true
+
+let obj = { name: "John", age: 25 };
+console.log(obj instanceof Array); // false
+
+let str = "Hello";
+console.log(str instanceof Array); // false
+
+// 误判情况
+function MyArray() {
+  // 自定义的类似数组的对象
+  this.length = 0;
+}
+MyArray.prototype = Array.prototype;
+
+const myArr = new MyArray();
+
+console.log(myArr instanceof Array); // true
+```
+
+在上述示例中，定义了一个名为 MyArray 的类似数组的对象。该对象具有类似数组的行为，包括 length 属性。通过指定 MyArray.prototype = Array.prototype，使该对象继承了 Array.prototype 上的方法和属性。<br>
+然后，创建了一个 myArr 的实例，并使用 instanceof 运算符判断 myArr 是否是数组。判断结果是 true。<br>
+因为 instanceof 运算符判断一个对象是否属于某个类时，不仅仅判断对象的构造函数是否是该类，还会检查对象的原型链上是否存在该类的原型。在本例中，myArr 的原型对象为 Array.prototype，因此会被判断为数组。<br>
+这种情况下，instanceof 的判断结果会产生误解，因为 myArr 并非通过数组字面量或构造函数创建的真正数组对象。<br>
+
+**3、Object.prototype.toString.call()**<br>
+用于获取对象类型的方法，会返回一个表示对象类型的字符串。对于数组类型的变量，返回的字符串是"[object Array]"。<br>
+**（1）简单高效：**简单易懂，一行代码即可完成判断，且性能较好。<br>
+**（2）兼容性好：**适用于所有标准的 JavaScript 环境。<br>
+**（1）准确性高：**由于数组对象继承了 Array.prototype，因此返回的字符串 "[object Array]" 是数组特有的，可以准确判断是否为数组。<br>
+```javascript
+let arr = [1, 2, 3];
+let arrType = Object.prototype.toString.call(arr);
+console.log(arrType === "[object Array]"); // true
+
+let obj = { name: "John", age: 25 };
+let objType = Object.prototype.toString.call(obj);
+console.log(objType === "[ Array]"); // false
+
+let str = "Hello";
+let strType = Object.prototype.toString.call(str);
+console.log(strType === "[object Array]"); // false
+```
+
+**4、Array.prototype.isPrototypeOf()**<br>
+判断一个对象是否是另一个对象的原型。<br>
+```javascript
+let arr = [1, 2, 3];
+console.log(Array.prototype.isPrototypeOf(arr)); // true
+```
+
+**5、constructor**<br>
+判断变量的 constructor 是否等于 Array 来确定是否是数组。<br>
+如果对象的 constructor 属性被修改，或者是用户自定义的类，就可能导致判断结果失效。<br>
+```javascript
+function isArray(obj) {
+  return obj.constructor === Array;
+}
+
+console.log(isArray([])); // true
+console.log(isArray({})); // false
+
+// 误判情况
+let obj = { name: "John", age: 25 };
+console.log(isArray(obj)); // false
+
+obj.constructor = Array;
+console.log(isArray(obj)); // true
+```
+
+**6、typeof**<br>
+typeof 运算符会将数组、null 和其他引用类型都归类为 "object"，而无法准确判断一个对象是否是数组。这是因为在 JavaScript 中，数组是一种特殊的对象类型。<br>
+```javascript
+let arr = [1, 2, 3]
+let obj = { name: 'John' }
+console.log(typeof arr === 'object' && typeof arr.length === 'number');  // true
+console.log(typeof obj === 'object' && typeof obj.length === 'number');  // false
+```

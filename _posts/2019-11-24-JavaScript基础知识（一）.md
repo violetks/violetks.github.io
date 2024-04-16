@@ -79,7 +79,7 @@ console.error();
 (function(){}) instanceof Function  //true
 ```
 
-#### typeof bar ==="object"这个验证的风险有哪些？
+#### typeof bar === "object"这个验证的风险有哪些？
 对于Array、Null等特殊对象都是是返回object，会判断错误。<br>
 解决方法：`(bar !== null) && (typeof bar === “object”) && (! $.isArray(bar))`
 
