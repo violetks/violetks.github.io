@@ -21,14 +21,14 @@ function fn() { // 外部函数
 闭包是指**有权访问另一个函数作用域中的局部变量的函数**。当其中一个内部函数在外部函数以外被调用时，就会形成闭包。<br>
 **作用：**通过一系列方法，将函数内部的变量（局部变量）转化为全局变量。<br>
 **优点：**① 能够读取函数内部的局部变量；②闭包就是函数的局部变量集合，让这些变量<font color="red">一直存在于内存中</font>，不会在调用结束后被垃圾回收机制回收；③不增加额外的全局变量。<br>
-**缺点：**由于闭包会使函数中的变量存在于内存中，<font color="red">内存消耗很大，所以不能滥用闭包</font>；解决的办法是退出函数之前，将不使用的局部变量删除。<br>
+**缺点：**由于闭包会使函数中的变量存在于内存中，<font color="red">内存消耗很大，所以不能滥用闭包</font>。解决的办法是退出函数之前，将不使用的局部变量删除。<br>
 
 ### 二、给DOM元素绑定事件有哪几种方法？
-（1）使用内联，优先级最高，一个元素只能添加一个事件；<br>
+（1）使用内联，优先级最高，一个元素只能添加一个事件。<br>
 ```javascript
 <input type="button" value="btn" onclick="alert('内联！');">
 ```
-（2）使用元素的`.onclick`方法，一个元素只能添加一个事件；<br>
+（2）使用元素的`.onclick`方法，一个元素只能添加一个事件。<br>
 ```javascript
 <input type="button" value="btn">
 <script>
@@ -135,10 +135,10 @@ node.cloneNode(true); //既复制节点本身，也复制其所有的子节点
 ```
 （5）替换节点：`replaceChild(new,old)`<br>
 （6）获取节点的属性值<br>
-方式1：**元素节点.属性**，比如：node.src，node.className，node.title；<br>
-方式2：`node.getAttribute("属性名");`<br>
+方式1：**元素节点.属性**，比如：node.src，node.className，node.title。<br>
+方式2：`node.getAttribute("属性名")`<br>
 （7）设置节点的属性值<br>
-方式1：`node.src = ""；`<br>
+方式1：`node.src = ""`<br>
 方式2：`node.setAttribute(属性名，新的属性值)`<br>
 （8）删除节点属性：`node.removeAttribute(属性名)`
 
@@ -159,34 +159,34 @@ node.cloneNode(true); //既复制节点本身，也复制其所有的子节点
 ### 八、JS中开头"use strict"是什么意思？
 `"use strict"`是一种ECMAscript 5 添加的严格运行模式，这种模式使得 Javascript 在更严格的条件下运行。<br>
 **严格模式的限制：**<br>
-（1）不允许使用未声明的变量（对象也是一个变量）；<br>
-（2）不允许删除变量或对象；<br>
-（3）不允许删除函数；<br>
-（4）不允许删除一个不允许删除的属性；<br>
-（5）不允许变量重名；<br>
-（6）不允许使用八进制、转义字符；<br>
-（7）不允许对只读属性赋值；<br>
+（1）不允许使用未声明的变量（对象也是一个变量）。<br>
+（2）不允许删除变量或对象。<br>
+（3）不允许删除函数。<br>
+（4）不允许删除一个不允许删除的属性。<br>
+（5）不允许变量重名。<br>
+（6）不允许使用八进制、转义字符。<br>
+（7）不允许对只读属性赋值。<br>
 ```javascript
 "use strict";
 var obj = {};
 Object.defineProperty(obj,"x",{value:0,writable:false});
 obj.x = 3.14     //报错
 ```
-（8）不允许对一个使用getter方法读取的属性进行赋值；<br>
+（8）不允许对一个使用getter方法读取的属性进行赋值。<br>
 ```javascript
 "use strict";
 var obj = {};
 var obj = {get x() {return 0}};
 obj.x = 3.14     //报错
 ```
-（9）不能使用`eval`、`arguments`作为变量名；<br>
-（10）由于一些安全原因，在作用域`eval()`创建的变量不能被调用；<br>
+（9）不能使用`eval`、`arguments`作为变量名。<br>
+（10）由于一些安全原因，在作用域`eval()`创建的变量不能被调用。<br>
 ```javascript
 "use strict";
 eval("var x = 2");
 alert(x);       //报错
 ```
-**（11）禁止this关键字指向全局对象；**<br>
+**（11）禁止this关键字指向全局对象。**<br>
 **为什么使用严格模式：**<br>
 消除JavaScript语法的一些不合理、不严谨之处，减少一些怪异行为；消除代码运行的一些不安全之处，**保证代码运行的安全**；提高编译器效率，增加运行速度；另一方面，同样的代码，在**严格模式**中，可能会有不一样的运行结果；一些在“正常模式”下可以运行的语句，在“严格模式”下将不能运行。<br>
 
@@ -265,9 +265,9 @@ function f1(){
 element.onclick=function(){}
 ```
 **优点**：写法兼容到主流浏览器<br>
-**缺点**：当同一个element元素绑定多个事件时，只有最后一个事件会被添加，相当于一次只能添加一个事件；<br>
+**缺点**：当同一个element元素绑定多个事件时，只有最后一个事件会被添加，相当于一次只能添加一个事件。<br>
 ```javascript
-//IE:attachEvent;三个方法执行顺序：3-2-1；
+//IE:attachEvent;三个方法执行顺序：3-2-1
 elment.attachEvent("onclick",handler1);
 elment.attachEvent("onclick",handler2);
 elment.attachEvent("onclick",handler3);
@@ -362,9 +362,9 @@ element.style.cssText += 'height: 100px !important';
 ```
 
 ### 十六、new Date()获取的时间是什么时间
-**运行环境的时间**：如果是**浏览器**那就是电脑时间或者手机时间；如果是**node.js**那就是服务器时间<br>
-前台获取的时间都用处不大、用户可以改、不安全；通常时间用于从后端传入、服务器的时间一定是统一的、解析时间戳；<br>
-js中单独调用new Date()，例如document.write(new Date())；显示的结果是：Mar 31 10:10:43 UTC+0800 2012 这种格式的时间； 但是用new Date() 参与计算会自动转换为从1970.1.1开始的毫秒数。<br>
+**运行环境的时间**：如果是**浏览器**那就是电脑时间或者手机时间；如果是**node.js**那就是服务器时间。<br>
+前台获取的时间都用处不大、用户可以改、不安全。通常时间用于从后端传入、服务器的时间一定是统一的、解析时间戳。<br>
+js中单独调用new Date()，例如document.write(new Date())，显示的结果是：Mar 31 10:10:43 UTC+0800 2012 这种格式的时间。但是用new Date() 参与计算会自动转换为从1970.1.1开始的毫秒数。<br>
 #### JS获取当前时间戳
 ```javascript
 // 方法1

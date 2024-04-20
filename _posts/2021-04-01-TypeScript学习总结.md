@@ -101,8 +101,8 @@ const obj: Person = {
 }
 ```
 使用接口时如果传入额外属性会报错，有两种解决方法：<br>
-（1）使用类型断言；<br>
-（2）接口中添加一个字符串索引签名：<br>
+（1）使用类型断言。<br>
+（2）接口中添加一个字符串索引签名。<br>
 ```javascript
 interface SquareConfig {
   color?: string;
