@@ -40,11 +40,11 @@ tags:
 
 ### 五、什么是全局变量？如何声明？使用全局变量有哪些问题
 全局变量是整个代码长度可用的变量，也就是说这些变量没有任何作用域。**var 关键字用于声明局部变量或对象。**如果省略 var 关键字，则声明一个全局变量。<br>
-使用全局变量的**优点**是：可以减少变量的个数，减少由于实际参数和形式参数的数据传递带来的时间消耗。<br>
+使用全局变量的**优点**：减少变量个数，减少由于实际参数和形式参数的数据传递带来的时间消耗。<br>
 使用全局变量所面临的**问题**是本地和全局变量名称的冲突。此外，全局变量破坏了函数的封装性能，很难调试和测试依赖于全局变量的代码。<br>
 
 ### 六、JavaScript 输出方式
-1、`alert()`：以字符串格式输出<br>
+1、`alert()`：以字符串格式输出。<br>
 ```javascript
 alert(true)     // 输出字符串 true
 alert([1,2,3])  // 输出字符串 1,2,3
@@ -62,14 +62,14 @@ console.error();
 5、向页面输出内容：`document.write();`
 
 ### 七、JavaScript 数据类型
-- **六个值类型：**string、number、boolean、null、undefined、Symbol（ES6 引入，表示独一无二的值）
+- **六个值类型：**string、number、boolean、null、undefined、Symbol（ES6 引入，表示独一无二的值）。
 - **引用数据类型：**Object、Array、Function、Date、RegExp（正则）。
 
 #### 检测类型常用`typeof`和`instanceof`
 （1）`typeof`：返回值是一个字符串，用来说明变量的数据类型。<br>
-- 返回结果：string、number、boolean、function、object、undefined
-- 判断变量是否存在：`typeof a != "undefined"`
-- 对于 Array、Null 等特殊对象使用 typeof 一律返回 object
+- 返回结果：string、number、boolean、function、object、undefined。
+- 判断变量是否存在：`typeof a != "undefined"`。
+- 对于 Array、Null 等特殊对象使用 typeof 一律返回 object。
 
 （2）`instanceof`：用于判断一个变量是否属于某个对象的实例。<br>
 ```javascript
@@ -81,12 +81,12 @@ console.error();
 
 #### typeof bar === "object" 这个验证的风险有哪些？
 对于 Array、Null 等特殊对象都是是返回 object，会判断错误。<br>
-解决方法：`(bar !== null) && (typeof bar === “object”) && (! $.isArray(bar))`
+解决方法：`(bar !== null) && (typeof bar === "object") && (!Array.isArray(bar))`
 
 ```javascript
 console.log(true + 1);         //2
-console.log('name' + true);  	 //nametrue
-console.log(undefined + 1); 	 //NaN
+console.log('name' + true);    //nametrue
+console.log(undefined + 1);    //NaN
 console.log(typeof undefined); //undefined
 console.log(typeof(NaN));      //number
 console.log(typeof(null));     //object
@@ -98,27 +98,23 @@ console.log(typeof(null));     //object
 （3）== 会自动转换类型，=== 不会。<br>
 
 ### 九、null 和 undefined 的区别
-1、undefined：Undefined 类型，字面意思是未定义的值，**表示一个变量最原始的状态，而非人为操作的结果。**这种原始状态会在以下 4 种场景中出现：<br>
+1、`undefined`：Undefined 类型，字面意思是未定义的值，**表示一个变量最原始的状态，而非人为操作的结果。**这种原始状态会在以下 4 种场景中出现：<br>
 （1）声明了一个变量但未初始化。<br>
 （2）访问对象上不存在的属性。<br>
 （3）函数定义了形参，但没有传递实参。<br>
 （4）使用 void 对表达式求值。<br>
-2、null：Null 类型，代表 “空值”，**表示一个对象被人为的设置为空对象，而非一个变量最原始的状态。**代表一个空对象指针，使用 typeof 运算得到 “object” ，是因为 JavaScript 数据类型在底层都是以二进制的形式表示的，**二进制的前三位为 0 会被 typeof 判断为对象类型**，而 null 的二进制位恰好都是 0 ，因此 null 被误判断为 Object 类型。<br>
+2、`null`：Null 类型，代表 “空值”，**表示一个对象被人为的设置为空对象，而非一个变量最原始的状态。**代表一个空对象指针，使用 typeof 运算得到 “object” ，是因为 JavaScript 数据类型在底层都是以二进制的形式表示的，**二进制的前三位为 0 会被 typeof 判断为对象类型**，而 null 的二进制位恰好都是 0 ，因此 null 被误判断为 Object 类型。<br>
 
 ### 十、NaN 是 Number 类型，验证它的函数：isNaN()
 
-### 十一、JavaScript 实现继承的六种方式
-原型链继承、构造函数继承、组合继承、原型式继承、寄生式继承、寄生组合式继承。<br>
-参考文章：https://www.cnblogs.com/Leophen/p/11401734.html
-
-### 十二、双问号的使用
+### 十一、双问号的使用
 
 ```javascript
 let str = name ?? '';
 ```
 如果 `name` 存在， `str = name`，不存在则 `str = ''`。
 
-### 十三、JavaScript 构造函数和普通函数的区别（★）
+### 十二、JavaScript 构造函数和普通函数的区别（★）
 1、构造函数也是一个普通函数，创建方式和普通函数一样，但构造函数习惯上首字母大写。<br>
 2、构造函数和普通函数的区别在于：调用方式不一样。作用也不一样，构造函数用来新建实例对象。<br>
 3、调用方式：普通函数的调用方式直接用`person()`，构造函数的调用方式需要使用`new`关键字来调用`new Person()`。<br>
@@ -135,6 +131,6 @@ function Person(name, job, age) {
 }
 ```
 
-### 十四、JavaScript 递归函数（★）
+### 十三、JavaScript 递归函数（★）
 1、如果一个函数在内部可以调用其本身，那么这个函数就是**递归函数**。<br>
 2、递归应用例子：求 1~n 的阶乘、求斐波那契数列、实现多级菜单结构。<br>
