@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      JavaScript 实现继承的六种方式
-date:       2019-11-29
+date:       2023-04-04
 author:     violetks
 header-img: img/post-bg-js-version.jpg
 catalog: true

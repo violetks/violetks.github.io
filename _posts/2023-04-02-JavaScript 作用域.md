@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      JavaScript 作用域
-date:       2019-11-28
+date:       2023-04-02
 author:     violetks
 header-img: img/post-bg-js-version.jpg
 catalog: true

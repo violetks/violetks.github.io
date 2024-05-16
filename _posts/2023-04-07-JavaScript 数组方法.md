@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      JavaScript 数组方法
-date:       2019-12-12
+date:       2023-04-07
 author:     violetks
 header-img: img/post-bg-js-version.jpg
 catalog: true
